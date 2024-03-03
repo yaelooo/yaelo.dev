@@ -1,0 +1,45 @@
+---
+let currentUrl = Astro.url.pathname.split("/")[1];
+let yes =
+  "text-custom-accent underline decoration-wavy decoration-2 underline-offset-4 font-bold";
+let no = "hover:text-custom-accent";
+---
+
+<ul class={Astro.props.class}>
+  <!-- Home -->
+  <li>
+    <a href="/" title="Inicio" class={`${currentUrl === "" ? yes : no}`}>
+      Inicio
+      <span class="sr-only">Ir a inicio</span>
+    </a>
+  </li>
+  <!-- Projects -->
+  <li>
+    <a
+      href="/proyectos"
+      title="Proyectos"
+      class={`${currentUrl === "proyectos" ? yes : no}`}
+    >
+      Proyectos
+      <span class="sr-only">Ir a proyectos</span>
+    </a>
+  </li>
+  <!-- Tools -->
+  <li>
+    <a
+      href="/herramientas"
+      title="Herramientas"
+      class={`${currentUrl === "herramientas" ? yes : no}`}
+    >
+      Herramientas
+      <span class="sr-only">Ir a herramientas</span>
+    </a>
+  </li>
+  <!-- Blog -->
+  <li>
+    <a href="/blog" title="Blog" class={`${currentUrl === "blog" ? yes : no}`}>
+      Blog
+      <span class="sr-only">Ir a blog</span>
+    </a>
+  </li>
+</ul>

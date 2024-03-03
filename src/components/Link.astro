@@ -1,0 +1,27 @@
+---
+interface Props {
+  title: string;
+  href: string;
+  sr: string;
+  isExternal?: boolean;
+  isButton?: boolean;
+}
+
+const { title, href, sr, isExternal = false, isButton = false } = Astro.props;
+const classes = {
+  link: "text-custom-accent hover:underline decoration-wavy decoration-custom-accent",
+  button:
+    "flex items-center py-2 px-4 gap-1 border-2 rounded-xl border-custom-accent text-custom-accent",
+};
+---
+
+<a
+  title={title}
+  href={href}
+  {...isButton ? { role: "button" } : {}}
+  {...isExternal ? { rel: "noopener noreferrer", target: "_blank" } : {}}
+  class={`${isButton ? classes.button : classes.link}`}
+>
+  <slot />
+  <span class="sr-only">{sr}</span>
+</a>

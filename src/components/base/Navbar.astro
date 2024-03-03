@@ -1,0 +1,78 @@
+---
+import NavLinks from "@base/NavLinks.astro";
+import ThemeSwitcher from "@base/ThemeSwitcher.astro";
+import Link from "@components/Link.astro";
+import Logo from "@icons/Logo.astro";
+import Menu from "@icons/Menu.astro";
+---
+
+<header
+  class="flex justify-center items-center mx-auto h-16 sticky top-0 z-50
+  max-w-sm sm:max-w-lg md:max-w-screen-sm lg:max-w-screen-md xl:max-w-screen-lg 2xl:max-w-screen-xl"
+>
+  <nav class="flex items-center justify-between w-full h-full backdrop-blur">
+    <Link title="Inicio" href="/" sr="Ir a inicio">
+      <Logo />
+    </Link>
+    <div class="flex gap-4">
+      <NavLinks class="hidden md:flex gap-4" />
+      <ThemeSwitcher />
+      <button
+        class="dropbtn flex md:hidden"
+        role="button"
+        onclick="toggleDropdown()"
+      >
+        <Menu />
+        <span class="sr-only">Menú</span>
+      </button>
+    </div>
+  </nav>
+  <div class="dropdown-content hidden absolute top-16 right-0 backdrop-blur">
+    <NavLinks class="flex flex-col gap-4 p-4" />
+  </div>
+</header>
+
+<script is:inline>
+  const dropdownClass = "dropdown-content";
+  const hiddenClass = "hidden";
+  const showClass = "flex";
+
+  function toggleDropdown() {
+    const dropdown = document.querySelector(`.${dropdownClass}`);
+    dropdown.classList.toggle(hiddenClass);
+    dropdown.classList.toggle(showClass);
+  }
+
+  function hideDropdown() {
+    const dropdown = document.querySelector(`.${dropdownClass}`);
+    dropdown.classList.remove(showClass);
+    dropdown.classList.add(hiddenClass);
+  }
+
+  // Close dropdown when clicking outside
+  window.addEventListener("click", (event) => {
+    if (
+      event.target.closest(".dropbtn") === null &&
+      event.target.closest(`.${dropdownClass}`) === null
+    ) {
+      hideDropdown();
+    }
+  });
+
+  // Close dropdown when pressing escape
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      hideDropdown();
+    }
+  });
+
+  // Close dropdown when resizing
+  window.addEventListener("resize", () => {
+    hideDropdown();
+  });
+
+  // Close dropdown when scrolling
+  window.addEventListener("scroll", () => {
+    hideDropdown();
+  });
+</script>

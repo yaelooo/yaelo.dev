@@ -1,0 +1,27 @@
+---
+import Layout from "@layouts/Layout.astro";
+
+import ImageRandom from "@components/ImageRandom.astro";
+---
+
+<Layout title="404" description="Página de error">
+  <article class="min-h-[calc(100svh-128px)] flex flex-col items-center gap-8">
+    <header class="flex flex-col items-center gap-6">
+      <h1 class="text-7xl font-bold">Error 404</h1>
+      <h2 class="text-5xl font-semibold">Página no encontrada.</h2>
+    </header>
+    <section class="flex flex-col gap-10">
+      <ImageRandom
+        classes="h-[228px] w-[242px]"
+        alt="imagen 404"
+        section="/notfound"
+      />
+      <a
+        href="/"
+        class="text-4xl font-bold underline decoration-wavy decoration-custom-accent underline-offset-8 hover:text-custom-accent"
+      >
+        Volver al inicio.
+      </a>
+    </section>
+  </article>
+</Layout>
