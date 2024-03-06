@@ -1,0 +1,17 @@
+---
+import Article from "@components/Article.astro";
+import ImageRandom from "@components/ImageRandom.astro";
+import Code from "@icons/Code.astro";
+---
+
+<Article id="proyectos" title="Proyectos.">
+  <Code slot="icon" class="size-8 stroke-custom-accent stroke-2" />
+  <section class="flex flex-col gap-4">
+    <p>// Sección por agregar. :D //</p>
+    <ImageRandom
+      classes="h-96 w-96"
+      alt="imagen proyectos"
+      section="/projects"
+    />
+  </section>
+</Article>

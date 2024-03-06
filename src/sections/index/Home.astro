@@ -1,0 +1,67 @@
+---
+import ImageRandom from "@components/ImageRandom.astro";
+import Link from "@components/Link.astro";
+import Github from "@icons/Github.astro";
+import Telegram from "@icons/Telegram.astro";
+import Mail from "@icons/Mail.astro";
+---
+
+<article id="home" class="min-h-svh flex items-center">
+  <section class="flex flex-col gap-y-10">
+    <h1 class="font-black text-[5.0rem] sm:text-8xl md:text-9xl flex flex-col">
+      <!-- 1 -->
+      <span class="flex">
+        <span class="mr-4">¡Hola!</span>
+        <ImageRandom
+          classes="h-24 w-24 sm:h-32 sm:w-32"
+          alt="imagen inicio"
+          section="/home"
+        />
+      </span>
+      <!-- 2 -->
+      <span class="flex">
+        <span class="mr-8">Soy</span>
+        <span
+          class="animate-text text-transparent bg-clip-text bg-custom-gradient"
+        >
+          Yael
+        </span>
+        <span class="animate-point">.</span>
+      </span>
+    </h1>
+    <div class="flex justify-center text-sm gap-3 sm:gap-4">
+      <Link
+        title="Github"
+        href="https://github.com/yaelooo"
+        isButton
+        isExternal
+        sr="Ve a mi github"
+      >
+        <Github />
+        Github
+      </Link>
+
+      <Link
+        title="Telegram"
+        href="https://t.me/yaelou"
+        isButton
+        isExternal
+        sr="Ve a mi Telegram"
+      >
+        <Telegram />
+        Telegram
+      </Link>
+
+      <Link
+        title="Correo"
+        href="mailto:me@yaelo.dev"
+        isButton
+        isExternal
+        sr="Envíame un correo o copia mi dirección de correo"
+      >
+        <Mail />
+        Correo
+      </Link>
+    </div>
+  </section>
+</article>

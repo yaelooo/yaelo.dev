@@ -1,138 +1,20 @@
 ---
 import Layout from "@layouts/Layout.astro";
-import Article from "@components/Article.astro";
-import ImageRandom from "@components/ImageRandom.astro";
-import Link from "@components/Link.astro";
-import Apps from "@icons/Apps.astro";
-import Code from "@icons/Code.astro";
-import Github from "@icons/Github.astro";
-import Mail from "@icons/Mail.astro";
-import Telegram from "@icons/Telegram.astro";
-import User from "@icons/User.astro";
-import { getAge } from "@scripts/getAge";
+import Home from "@sections/index/Home.astro";
+import Projects from "@sections/index/Projects.astro";
+import About from "@sections/index/About.astro";
 ---
 
 <Layout
-	title="Inicio"
-	description="Hola, mi nombre es Yael, me encanta el café, la música y los chocolates. Mi número favorito es el 2, mi color favorito es el morado, y mi comida favorita es el arroz."
+  title="Inicio"
+  description="Hola, mi nombre es Yael, me encanta el café, la música y los chocolates. Mi número favorito es el 2, mi color favorito es el morado, y mi comida favorita es el arroz."
 >
-	<!-- Home -->
-	<article id="home" class="min-h-svh flex items-center">
-		<section class="flex flex-col gap-y-10">
-			<h1
-				class="font-black text-[5.0rem] sm:text-8xl md:text-9xl flex flex-col"
-			>
-				<!-- 1 -->
-				<span class="flex">
-					<span class="mr-4">¡Hola!</span>
-					<ImageRandom
-						classes="h-24 w-24 sm:h-32 sm:w-32"
-						alt="imagen inicio"
-						section="/home"
-					/>
-				</span>
-				<!-- 2 -->
-				<span class="flex">
-					<span class="mr-8">Soy</span>
-					<span
-						class="animate-text text-transparent bg-clip-text bg-custom-gradient"
-					>
-						Yael
-					</span>
-					<span class="animate-point">.</span>
-				</span>
-			</h1>
-			<div class="flex justify-center text-sm gap-3 sm:gap-4">
-				<Link
-					title="Github"
-					href="https://github.com/yaelooo"
-					isButton
-					isExternal
-					sr="Ve a mi github"
-				>
-					<Github />
-					Github
-				</Link>
+  <!-- Home -->
+  <Home />
 
-				<Link
-					title="Telegram"
-					href="https://t.me/yaelou"
-					isButton
-					isExternal
-					sr="Ve a mi Telegram"
-				>
-					<Telegram />
-					Telegram
-				</Link>
+  <!-- Projects -->
+  <Projects />
 
-				<Link
-					title="Correo"
-					href="mailto:me@yaelo.dev"
-					isButton
-					isExternal
-					sr="Envíame un correo o copia mi dirección de correo"
-				>
-					<Mail />
-					Correo
-				</Link>
-			</div>
-		</section>
-	</article>
-
-	<!-- Projects -->
-	<Article id="proyectos" title="Proyectos.">
-		<Code slot="icon" class="size-8 stroke-custom-accent stroke-2" />
-		<section class="flex flex-col gap-4">
-			<p>// Sección por agregar. :D //</p>
-			<ImageRandom
-				classes="h-96 w-96"
-				alt="imagen proyectos"
-				section="/projects"
-			/>
-		</section>
-	</Article>
-
-	<!-- Tools -->
-	<Article id="herramientas" title="Herramientas.">
-		<Apps slot="icon" class="size-8 stroke-custom-accent stroke-2" />
-		<section class="flex flex-col gap-4">
-			<p>// Sección por agregar. :D //</p>
-			<ImageRandom
-				classes="h-96 w-96"
-				alt="imagen herramientas"
-				section="/projects"
-			/>
-		</section>
-	</Article>
-
-	<!-- About -->
-	<Article id="acerca" title="Sobre mi.">
-		<User slot="icon" class="size-8 stroke-custom-accent stroke-2" />
-		<section class="flex flex-col gap-4 md:flex-row md:justify-between">
-			<div class="flex flex-col gap-4 md:w-7/12">
-				<p>
-					Mi nombre es Yael, tengo {getAge} años, mi cumpleaños es el 2 de julio,
-					me encanta el café, la música y los chocolates, aunque actualmente estoy
-					intentando ser más saludable. Mi número favorito es el 2, mi color favorito
-					es el morado, y mi comida favorita es el arroz.
-				</p>
-				<p>
-					Me gusta mucho ver videos de Youtube, antes solía leer mucho, pero
-					ahora ya hace tiempo que no lo hago. Soy honesto y directo, por lo
-					cual no tengo muchos amigos.
-				</p>
-				<p>
-					Y pues supongo es todo, no hay muchas cosas interesantes acerca de mi,
-					jeje.
-				</p>
-			</div>
-			<div class="flex justify-center md:w-4/12">
-				<ImageRandom
-					classes="w-80 h-80 md:h-72 xl:h-80"
-					alt="imagen acerca de"
-					section="/about"
-				/>
-			</div>
-		</section>
-	</Article>
+  <!-- About -->
+  <About />
 </Layout>
