@@ -3,11 +3,19 @@ interface Props {
   title: string;
   href: string;
   sr: string;
+  extraClasses?: string;
   isExternal?: boolean;
   isButton?: boolean;
 }
 
-const { title, href, sr, isExternal = false, isButton = false } = Astro.props;
+const {
+  title,
+  href,
+  sr,
+  extraClasses,
+  isExternal = false,
+  isButton = false,
+} = Astro.props;
 const classes = {
   link: "text-custom-accent hover:underline decoration-wavy decoration-custom-accent",
   button:
@@ -20,7 +28,7 @@ const classes = {
   href={href}
   {...isButton ? { role: "button" } : {}}
   {...isExternal ? { rel: "noopener noreferrer", target: "_blank" } : {}}
-  class={`${isButton ? classes.button : classes.link}`}
+  class={`${isButton ? classes.button : classes.link} ${extraClasses}`}
 >
   <slot />
   <span class="sr-only">{sr}</span>
