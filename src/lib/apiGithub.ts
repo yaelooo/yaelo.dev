@@ -3,11 +3,15 @@ import { type APIGithubRepositories } from "src/types/api.ts";
 export async function getLastRepositories(): Promise<{ data: APIGithubRepositories[] | null, error: any | null }> {
   let data: APIGithubRepositories[] = [];
   let error: string | null = null;
+  const token = import.meta.env.PUBLIC_GITHUB_TOKEN;
 
   try {
     const res: Response = await fetch(
       "https://api.github.com/users/yaelooo/repos?per_page=3&sort=updated",
       {
+        headers: {
+          Authorization: `token ${token}`,
+        },
         cache: "force-cache",
       }
     );
