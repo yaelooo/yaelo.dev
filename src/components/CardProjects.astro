@@ -1,0 +1,79 @@
+---
+import Link from "@components/Link.astro";
+import ImageRandom from "@components/ImageRandom.astro";
+import Github from "@icons/Github.astro";
+import Web from "@icons/Web.astro";
+
+interface Props {
+  name: string;
+  description: string;
+  html_url: string;
+  created_at: Date;
+  updated_at: Date;
+  homepage: string;
+  language: string;
+}
+
+const {
+  name,
+  description,
+  html_url,
+  created_at,
+  updated_at,
+  homepage,
+  language,
+} = Astro.props;
+---
+
+<article
+  class="flex flex-col border-2 border-custom-accent gap-4 p-2 justify-between"
+>
+  <header class="flex justify-center">
+    <h2 class="flex flex-col gap-2 justify-center font-semibold text-xl">
+      <Link
+        title={name}
+        href={html_url}
+        sr={`Ir al proyecto ${name}`}
+        isExternal
+      >
+        {name}
+      </Link>
+      <ImageRandom
+        classes="h-60 w-60"
+        alt="imagen del proyecto"
+        src="/projects"
+      />
+    </h2>
+  </header>
+  <section class="flex flex-col gap-2">
+    <p>{description}</p>
+    <p>Updated at {new Date(updated_at).toLocaleDateString()}</p>
+    <p>Created at {new Date(created_at).toLocaleDateString()}</p>
+  </section>
+  <footer class="flex gap-2">
+    <!-- Languages used -->
+    <!-- <p>{language}</p> -->
+    <!-- Link github -->
+    <Link
+      title={`Ir al repositorio del proyecto ${name}`}
+      href={html_url}
+      sr={`Ir al repositorio del proyecto ${name}`}
+      isExternal
+    >
+      <Github />
+    </Link>
+    <!-- Link web -->
+    {
+      homepage ? (
+        <Link
+          title={`Ir a la página del proyecto ${name}`}
+          href={homepage}
+          sr={`Ir a la página del proyecto ${name}`}
+          isExternal
+        >
+          <Web />
+        </Link>
+      ) : null
+    }
+  </footer>
+</article>

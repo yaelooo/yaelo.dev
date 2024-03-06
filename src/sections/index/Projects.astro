@@ -1,13 +1,73 @@
 ---
 import Article from "@components/Article.astro";
+import CardProjects from "@components/CardProjects.astro";
+import Link from "@components/Link.astro";
 import ImageRandom from "@components/ImageRandom.astro";
 import Code from "@icons/Code.astro";
+
+import { type APIGithubRepositories } from "src/types/api.ts";
+let data: APIGithubRepositories[] = [];
+let error: string | null = null;
+
+try {
+  // const res: Response = await fetch(
+  //   "https://api.github.com/users/yaelooo/repos?per_page=3&sort=updated"
+  // );
+
+  const res: Response = await fetch(
+    "https://api.github.com/users/yaelooo/repos?per_page=3&sort=updated",
+    {
+      cache: "force-cache",
+    }
+  );
+
+  // Verify the status code
+  const statusCodes: { [status: number]: string } = {
+    400: "Bad Request",
+    401: "Unauthorized",
+    403: "Forbidden",
+    404: "Not Found",
+  };
+
+  if (res.status >= 200 && res.status < 300) {
+    // The request was successful
+  } else if (statusCodes[res.status]) {
+    throw new Error(statusCodes[res.status]);
+  } else {
+    // Other HTTP errors
+    throw new Error(`HTTP error! status: ${res.status}`);
+  }
+
+  // If everything is ok, assign the data
+  data = await res.json();
+} catch (err: unknown) {
+  error =
+    "Error fetching data: " +
+    (err instanceof Error ? err.message : String(err));
+}
 ---
 
 <Article id="proyectos" title="Proyectos.">
   <Code slot="icon" class="size-8 stroke-custom-accent stroke-2" />
-  <section class="flex flex-col gap-4">
-    <p>// Sección por agregar. :D //</p>
-    <ImageRandom classes="h-96 w-96" alt="imagen proyectos" src="/projects" />
-  </section>
+  {
+    error ? (
+      <section class="grid gap-4">
+        <h2 class="font-semibold text-xl">
+          Fallo al obtener los proyectos. :(
+        </h2>
+        <ImageRandom
+          classes="h-96 w-96"
+          alt="imagen proyectos"
+          src="/notfound"
+        />
+        <p>{error}.</p>
+      </section>
+    ) : (
+      <section class="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
+        {data.map((repo) => (
+          <CardProjects {...repo} />
+        ))}
+      </section>
+    )
+  }
 </Article>
