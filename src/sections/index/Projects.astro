@@ -1,15 +1,17 @@
 ---
 import Article from "@components/Article.astro";
 import CardProjects from "@components/CardProjects.astro";
+import Link from "@components/Link.astro";
 import ImageRandom from "@components/ImageRandom.astro";
 import Code from "@icons/Code.astro";
 
-import { getLastRepositories } from "@lib/apiGithub";
-const { data, error } = await getLastRepositories();
+import { getRepositories } from "@lib/apiGithub";
+const { data, error } = await getRepositories(3);
 ---
 
 <Article id="proyectos" title="Proyectos.">
   <Code slot="icon" class="size-8 stroke-custom-accent stroke-2" />
+  <p class="mb-4">Sección por acabar. :D</p>
   {
     error ? (
       <section class="grid gap-4">
@@ -25,7 +27,40 @@ const { data, error } = await getLastRepositories();
       </section>
     ) : (
       <section class="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
-        {data && data.map((repo) => <CardProjects {...repo} />)}
+        {Array.isArray(data) && data.map((repo) => <CardProjects {...repo} />)}
+        <article class="flex flex-col border-2 border-custom-accent/40 shadow-lg shadow-custom-accent/20 gap-4 p-4 rounded-2xl">
+          <header class="flex justify-around h-full">
+            <h2 class="flex flex-col gap-4 justify-center items-center font-semibold text-xl xl:gap-10">
+              <Link
+                title="Ver más proyectos. :D"
+                href="/proyectos"
+                sr="Ir a la sección de proyectos."
+                extraClasses="decoration-2 underline-offset-4"
+              >
+                Ver más proyectos... :D
+              </Link>
+              <ImageRandom
+                classes="h-60 w-60"
+                alt="imagen del proyecto"
+                src="/projects"
+              />
+            </h2>
+          </header>
+        </article>
+        <article class="hidden md:flex xl:hidden flex-col justify-beetw border-2 border-custom-accent/40 shadow-lg shadow-custom-accent/20 gap-4 p-4 rounded-2xl">
+          <header class="flex justify-center h-full">
+            <h2 class="flex flex-col gap-4 items-center font-semibold text-xl xl:gap-10">
+              <span class="text-custom-accent">
+                Perdón, ya no supe que más poner para rellenar el espacio. :c
+              </span>
+              <ImageRandom
+                classes="h-60 w-60"
+                alt="imagen del proyecto"
+                src="/about"
+              />
+            </h2>
+          </header>
+        </article>
       </section>
     )
   }
