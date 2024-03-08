@@ -5,8 +5,6 @@ import Telegram from "@icons/Telegram.astro";
 import Facebook from "@icons/Facebook.astro";
 import Instagram from "@icons/Instagram.astro";
 import Github from "@icons/Github.astro";
-
-let currentUrl = Astro.url;
 ---
 
 <footer
@@ -14,13 +12,10 @@ let currentUrl = Astro.url;
 >
   <hr class="border-custom-accent mt-3" />
   <nav class="flex items-center justify-between w-full h-full">
-    <Link
-      title="Principio"
-      href={`${currentUrl}#`}
-      sr="Ve al principio de la página."
-    >
+    <button id="scroll-to-top">
       <Arrow />
-    </Link>
+      <span class="sr-only">Ve al principio de la página</span>
+    </button>
     <div class="flex gap-3">
       <Link
         title="Telegram"
@@ -60,3 +55,20 @@ let currentUrl = Astro.url;
     </div>
   </nav>
 </footer>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const $button = document.getElementById("scroll-to-top");
+
+    window.addEventListener("scroll", () => {
+      const display = window.scrollY > 20 ? "block" : "none";
+      if ($button) {
+        $button.style.display = display;
+      }
+    });
+
+    $button?.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  });
+</script>
