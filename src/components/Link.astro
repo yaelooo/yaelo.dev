@@ -16,19 +16,24 @@ const {
   isExternal = false,
   isButton = false,
 } = Astro.props;
-const classes = {
-  link: "text-custom-accent hover:underline decoration-wavy decoration-custom-accent",
-  button:
-    "flex items-center py-2 px-4 gap-1 border-2 rounded-xl border-custom-accent text-custom-accent",
-};
+const link =
+  "text-custom-accent hover:underline decoration-wavy decoration-custom-accent";
+const button =
+  "flex items-center py-2 px-4 gap-1 border-2 rounded-xl border-custom-accent text-custom-accent";
 ---
 
 <a
   title={title}
   href={href}
-  {...isButton ? { role: "button" } : {}}
-  {...isExternal ? { rel: "noopener noreferrer", target: "_blank" } : {}}
-  class={`${isButton ? classes.button : classes.link} ${extraClasses}`}
+  class:list={[
+    `${extraClasses}`,
+    {
+      [button]: isButton,
+      [link]: !isButton,
+    },
+  ]}
+  {...isButton && { role: "button" }}
+  {...isExternal && { rel: "noopener noreferrer", target: "_blank" }}
 >
   <slot />
   <span class="sr-only">{sr}</span>
