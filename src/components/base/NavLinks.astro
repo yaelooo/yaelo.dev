@@ -5,8 +5,7 @@ import { upperFirstLetter } from "@utils/firstLetter";
 const currentUrl = Astro.url.pathname.split("/")[1];
 const activeLinkClass =
   "text-custom-accent underline decoration-wavy decoration-2 underline-offset-4 font-bold";
-const inactiveLinkClass =
-  "text-current hover:text-custom-accent hover:no-underline";
+const inactiveLinkClass = "hover:text-custom-accent";
 const links = [
   { href: "/", title: "inicio" },
   { href: "/proyectos", title: "proyectos" },
@@ -22,6 +21,7 @@ const links = [
           title={upperFirstLetter(link.title)}
           href={link.href}
           sr={`Ir a ${upperFirstLetter(link.title)}`}
+          isCustom
           extraClasses={`${currentUrl === link.href.split("/")[1] ? activeLinkClass : inactiveLinkClass}`}
         >
           {upperFirstLetter(link.title)}

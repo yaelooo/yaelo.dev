@@ -17,7 +17,8 @@ const { id, title } = Astro.props;
         title={title}
         href={`#${id}`}
         sr={`Sección ${title}`}
-        extraClasses="text-current underline-offset-8"
+        isCustom
+        extraClasses="text-current hover:underline decoration-wavy decoration-custom-accent underline-offset-8"
       >
         {title}
       </Link>

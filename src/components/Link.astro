@@ -1,37 +1,44 @@
 ---
-interface Props {
+interface BaseProps {
   title: string;
   href: string;
   sr: string;
-  extraClasses?: string;
   isExternal?: boolean;
   isButton?: boolean;
 }
+
+interface CustomProps extends BaseProps {
+  isCustom?: true;
+  extraClasses: string;
+}
+
+interface NonCustomProps extends BaseProps {
+  isCustom?: false;
+  extraClasses?: never;
+}
+
+type Props = CustomProps | NonCustomProps;
 
 const {
   title,
   href,
   sr,
   extraClasses,
+  isCustom = false,
   isExternal = false,
   isButton = false,
-} = Astro.props;
+} = Astro.props as Props;
 
-const link = "hover:underline decoration-wavy decoration-custom-accent";
+const link =
+  "text-custom-accent hover:underline decoration-wavy decoration-custom-accent";
 const button =
-  "flex items-center py-2 px-4 gap-1 border-2 border-custom-accent rounded-xl";
+  "text-custom-accent flex items-center py-2 px-4 gap-1 border-2 border-custom-accent rounded-xl";
 ---
 
 <a
   title={title}
   href={href}
-  class:list={[
-    `text-custom-accent ${extraClasses}`,
-    {
-      [button]: isButton,
-      [link]: !isButton,
-    },
-  ]}
+  class={isCustom ? extraClasses : isButton ? button : link}
   {...isButton && { role: "button" }}
   {...isExternal && { rel: "noopener noreferrer", target: "_blank" }}
 >
