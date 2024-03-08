@@ -1,7 +1,7 @@
 ---
 import Layout from "@layouts/Layout.astro";
-
 import ImageRandom from "@components/ImageRandom.astro";
+import Link from "@components/Link.astro";
 ---
 
 <Layout title="404" description="Página de error">
@@ -16,12 +16,14 @@ import ImageRandom from "@components/ImageRandom.astro";
         alt="imagen 404"
         src="/notfound"
       />
-      <a
+      <Link
+        title="Volver al inicio"
         href="/"
-        class="text-4xl font-bold underline decoration-wavy decoration-custom-accent underline-offset-8 hover:text-custom-accent"
+        sr="Volver al inicio"
+        extraClasses="text-4xl font-bold underline underline-offset-8 text-current hover:text-custom-accent"
       >
         Volver al inicio.
-      </a>
+      </Link>
     </section>
   </article>
 </Layout>
