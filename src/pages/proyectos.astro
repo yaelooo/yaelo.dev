@@ -1,10 +1,39 @@
 ---
 import Layout from "@layouts/Layout.astro";
+import CardProjects from "@components/CardProjects.astro";
+import ImageRandom from "@components/ImageRandom.astro";
+
+import { getRepositories } from "@lib/apiGithub";
+const { data, error } = await getRepositories(6);
 ---
 
 <Layout
   title="Proyectos"
   description="Proyectos escolares, laborales y personales."
 >
-  <h1 class="text-3xl">Página por agregar. :D</h1>
+  <article id="proyectos" title="Proyectos.">
+    {
+      error ? (
+        <section class="grid gap-4">
+          <h2 class="font-semibold text-xl">
+            Fallo al obtener los proyectos. :(
+          </h2>
+          <ImageRandom
+            classes="h-96 w-96"
+            alt="imagen proyectos"
+            src="/notfound"
+          />
+          <p>{error}.</p>
+        </section>
+      ) : (
+        <>
+          <h1 class="text-3xl font-semibold mb-6">Últimos proyectos. :D</h1>
+          <section class="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
+            {Array.isArray(data) &&
+              data.map((repo) => <CardProjects {...repo} />)}
+          </section>
+        </>
+      )
+    }
+  </article>
 </Layout>
