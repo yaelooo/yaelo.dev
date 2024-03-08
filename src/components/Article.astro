@@ -1,4 +1,6 @@
 ---
+import Link from "@/components/Link.astro";
+
 interface Props {
   id: string;
   title: string;
@@ -11,12 +13,14 @@ const { id, title } = Astro.props;
   <header class="flex font-semibold pt-16 mb-6">
     <h1 class="flex gap-2 text-3xl">
       <slot name="icon" />
-      <a
+      <Link
+        title={title}
         href={`#${id}`}
-        class="hover:underline decoration-wavy decoration-2 decoration-custom-accent underline-offset-8"
+        sr={`Sección ${title}`}
+        extraClasses="text-current underline-offset-8"
       >
         {title}
-      </a>
+      </Link>
     </h1>
   </header>
   <slot />
