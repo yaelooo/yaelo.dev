@@ -3,6 +3,7 @@ import Link from "@components/Link.astro";
 import ImageRandom from "@components/ImageRandom.astro";
 import Github from "@icons/Github.astro";
 import Web from "@icons/Web.astro";
+import Info from "@icons/Info.astro";
 
 interface Props {
   name: string;
@@ -51,30 +52,39 @@ const {
     <p>Updated at {new Date(updated_at).toLocaleDateString()}</p>
     <p>Created at {new Date(created_at).toLocaleDateString()}</p>
   </section>
-  <footer class="flex gap-2">
-    <!-- Link github -->
+  <footer class="flex justify-between">
+    <span class="flex gap-2">
+      <!-- Link github -->
+      <Link
+        title={`Ir al repositorio del proyecto ${name}`}
+        href={html_url}
+        sr={`Ir al repositorio del proyecto ${name}`}
+        isExternal
+      >
+        <Github />
+      </Link>
+      <!-- Link web -->
+      {
+        homepage ? (
+          <Link
+            title={`Ir a la página del proyecto ${name}`}
+            href={homepage}
+            sr={`Ir a la página del proyecto ${name}`}
+            isExternal
+          >
+            <Web />
+          </Link>
+        ) : null
+      }
+      <!-- Most used language-->
+      <span>Lenguaje principal: {language}</span>
+    </span>
     <Link
-      title={`Ir al repositorio del proyecto ${name}`}
+      title={`Más información del proyecto ${name}`}
       href={html_url}
-      sr={`Ir al repositorio del proyecto ${name}`}
-      isExternal
+      sr={`Más información del proyecto ${name}`}
     >
-      <Github />
+      <Info />
     </Link>
-    <!-- Link web -->
-    {
-      homepage ? (
-        <Link
-          title={`Ir a la página del proyecto ${name}`}
-          href={homepage}
-          sr={`Ir a la página del proyecto ${name}`}
-          isExternal
-        >
-          <Web />
-        </Link>
-      ) : null
-    }
-    <!-- Most used language-->
-    <p>Lenguaje: {language}</p>
   </footer>
 </article>
