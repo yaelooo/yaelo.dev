@@ -1,38 +1,32 @@
 ---
-let currentUrl = Astro.url.pathname.split("/")[1];
-let yes =
+import Link from "@components/Link.astro";
+import { upperFirstLetter } from "@utils/firstLetter";
+
+const currentUrl = Astro.url.pathname.split("/")[1];
+const activeLinkClass =
   "text-custom-accent underline decoration-wavy decoration-2 underline-offset-4 font-bold";
-let no = "hover:text-custom-accent";
+const inactiveLinkClass =
+  "text-current hover:text-custom-accent hover:no-underline";
+const links = [
+  { href: "/", title: "inicio" },
+  { href: "/proyectos", title: "proyectos" },
+  { href: "/herramientas", title: "herramientas" },
+];
 ---
 
 <ul class={Astro.props.class}>
-  <!-- Home -->
-  <li>
-    <a href="/" title="Inicio" class={`${currentUrl === "" ? yes : no}`}>
-      Inicio
-      <span class="sr-only">Ir a inicio</span>
-    </a>
-  </li>
-  <!-- Projects -->
-  <li>
-    <a
-      href="/proyectos"
-      title="Proyectos"
-      class={`${currentUrl === "proyectos" ? yes : no}`}
-    >
-      Proyectos
-      <span class="sr-only">Ir a proyectos</span>
-    </a>
-  </li>
-  <!-- Tools -->
-  <li>
-    <a
-      href="/herramientas"
-      title="Herramientas"
-      class={`${currentUrl === "herramientas" ? yes : no}`}
-    >
-      Herramientas
-      <span class="sr-only">Ir a herramientas</span>
-    </a>
-  </li>
+  {
+    links.map((link) => (
+      <li>
+        <Link
+          title={upperFirstLetter(link.title)}
+          href={link.href}
+          sr={`Ir a ${upperFirstLetter(link.title)}`}
+          extraClasses={`${currentUrl === link.href.split("/")[1] ? activeLinkClass : inactiveLinkClass}`}
+        >
+          {upperFirstLetter(link.title)}
+        </Link>
+      </li>
+    ))
+  }
 </ul>
