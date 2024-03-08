@@ -40,10 +40,10 @@ const {
       >
         {name}
       </Link>
-      <ImageRandom
-        classes="h-60 w-60"
-        alt="imagen del proyecto"
-        src="/projects"
+      <img
+        src={`https://raw.githubusercontent.com/yaelooo/${name}/main/.ignore/${name}.webp`}
+        alt={`imagen del proyecto ${name}`}
+        loading="lazy"
       />
     </h2>
   </header>
