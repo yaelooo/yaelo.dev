@@ -46,6 +46,10 @@ export async function getRepositories(perPage: number): Promise<{ data: APIGithu
   return await fetchData(`${BASE_URL}/repos?per_page=${perPage}&sort=updated`);
 }
 
+export async function getRepository(repo: string): Promise<{ data: APIGithubRepositories | null, error: any | null }> {
+  return await fetchData(`https://api.github.com/repos/yaelooo/${repo}`);
+}
+
 export async function getLanguages(repo: string) {
   return await fetchData(`https://api.github.com/repos/yaelooo/${repo}/languages`);
 }
