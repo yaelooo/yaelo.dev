@@ -30,23 +30,22 @@ const {
   class="flex flex-col border-2 border-custom-accent/40 shadow-lg shadow-custom-accent/20 gap-4 p-4 rounded-2xl justify-between"
 >
   <header class="flex justify-center">
-    <h2 class="flex flex-col gap-4 items-center font-semibold text-xl">
+    <h3 class="items-center font-semibold text-xl">
       <Link
         title={name}
-        href={html_url}
+        href={`/proyectos/${name}`}
         sr={`Ir al proyecto ${name}`}
-        isExternal
         isCustom
-        extraClasses="text-custom-accent hover:underline decoration-2 decoration-wavy decoration-custom-accent underline-offset-4"
+        extraClasses="text-custom-accent hover:underline decoration-2 decoration-wavy decoration-custom-accent underline-offset-4 flex flex-col gap-4 items-center"
       >
         {name}
+        <img
+          src={`https://raw.githubusercontent.com/yaelooo/${name}/main/.ignore/${name}.webp`}
+          alt={`imagen del proyecto ${name}`}
+          loading="lazy"
+        />
       </Link>
-      <img
-        src={`https://raw.githubusercontent.com/yaelooo/${name}/main/.ignore/${name}.webp`}
-        alt={`imagen del proyecto ${name}`}
-        loading="lazy"
-      />
-    </h2>
+    </h3>
   </header>
   <section class="flex flex-col gap-2">
     <p>{description}</p>
@@ -83,9 +82,8 @@ const {
     <!-- Link info -->
     <Link
       title={`Más información del proyecto ${name}`}
-      href={html_url}
+      href={`/proyectos/${name}`}
       sr={`Más información del proyecto ${name}`}
-      isExternal
     >
       <Info />
     </Link>
