@@ -58,45 +58,50 @@ const metatags = {
       <slot />
     </Main>
     <Footer />
-  </body>
+  </body><style is:global>
+    .light {
+      --color-primary: 20, 20, 20;
+      --color-accent: 2, 132, 199;
+      --color-background: 245, 245, 245;
+      --color-gradient: linear-gradient(
+        to right,
+        /* from-sky-500 */ rgb(96, 165, 250) 0%,
+        /* via-blue-600 */ rgb(37, 99, 235) 30%,
+        /* to-indigo-400 */ rgb(99, 102, 241) 60%
+      );
+    }
+
+    .dark {
+      --color-primary: 245, 245, 245;
+      --color-accent: 186, 230, 253;
+      --color-background: 20, 20, 20;
+      --color-gradient: linear-gradient(
+        to right,
+        /* from-sky-300 */ rgb(165, 243, 252) 0%,
+        /* via-blue-500 */ rgb(59, 130, 246) 30%,
+        /* to-indigo-300 */ rgb(180, 198, 252) 60%
+      );
+    }
+
+    html {
+      font-family: "Shantell Sans Variable", system-ui;
+      font-size: 0.875rem;
+      background-size: 224px;
+    }
+
+    h1 {
+      text-wrap: balance;
+    }
+
+    p {
+      text-wrap: pretty;
+    }
+  </style>
+
+  <script is:inline>
+    document.addEventListener("astro:after-swap", () => {
+      const theme = localStorage.getItem("theme");
+      document.documentElement.className = theme;
+    });
+  </script>
 </html>
-
-<style is:global>
-	.light {
-		--color-primary: 20, 20, 20;
-		--color-accent: 2, 132, 199;
-		--color-background: 245, 245, 245;
-		--color-gradient: linear-gradient(
-			to right,
-			/* from-sky-500 */ rgb(96, 165, 250) 0%,
-			/* via-blue-600 */ rgb(37, 99, 235) 30%,
-			/* to-indigo-400 */ rgb(99, 102, 241) 60%
-		);
-	}
-
-	.dark {
-		--color-primary: 245, 245, 245;
-		--color-accent: 186, 230, 253;
-		--color-background: 20, 20, 20;
-		--color-gradient: linear-gradient(
-			to right,
-			/* from-sky-300 */ rgb(165, 243, 252) 0%,
-			/* via-blue-500 */ rgb(59, 130, 246) 30%,
-			/* to-indigo-300 */ rgb(180, 198, 252) 60%
-		);
-	}
-
-	html {
-		font-family: "Shantell Sans Variable", system-ui;
-		font-size: 0.875rem;
-		background-size: 224px;
-	}
-
-	h1 {
-		text-wrap: balance;
-	}
-
-	p {
-		text-wrap: pretty;
-	}
-</style>
