@@ -1,0 +1,261 @@
+---
+import Layout from "@layouts/Layout.astro";
+import ImageRandom from "@components/ImageRandom.astro";
+import Link from "@components/Link.astro";
+import Book from "@icons/Book.astro";
+import Github from "@icons/Github.astro";
+import Web from "@icons/Web.astro";
+import { getRepository, getLanguages } from "@lib/apiGithub";
+import { marked } from "marked";
+
+const { repo } = Astro.params;
+const { data, error } = await getRepository(`${repo}`);
+const languages = await getLanguages(`${repo}`);
+
+if (error) {
+  return Astro.redirect("/404");
+}
+
+const response = await fetch(
+  `https://raw.githubusercontent.com/yaelooo/${repo}/main/README.md`
+);
+const readme = await response.text();
+let content = await marked.parse(readme);
+
+let updatedContent = content
+  // RegEx to open links in a new tab
+  .replace(
+    /<a href="([^"]*)">/g,
+    '<a href="$1" rel="noopener noreferrer" target="_blank">'
+  )
+  // RegEx to add copy button to code blocks
+  .replace(
+    /<\/code>/g,
+    '</code><div class="copy_container"><button id="buttonCopy" title="Copiar texto" class="buttonCopy"><svg width="24" height="24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" /><path d="M7 9.667A2.667 2.667 0 0 1 9.667 7h8.666A2.667 2.667 0 0 1 21 9.667v8.666A2.667 2.667 0 0 1 18.333 21H9.667A2.667 2.667 0 0 1 7 18.333z" /><path d="M4.012 16.737A2.005 2.005 0 0 1 3 15V5c0-1.1.9-2 2-2h10c.75 0 1.158.385 1.5 1" /></svg></button></div>'
+  );
+---
+
+<Layout title="Proyectos" description="Proyectos en GitHub">
+  <article>
+    <header class="flex flex-col gap-4">
+      {
+        error ? (
+          <>
+            <h2 class="text-center">
+              Fallo al obtener los datos del proyecto. :(
+            </h2>
+            <ImageRandom
+              classes="h-96 w-96"
+              alt="imagen proyectos"
+              src="/notfound"
+            />
+            <p>{error}.</p>
+          </>
+        ) : (
+          <>
+            <h1 class="text-center">{repo}</h1>
+            <h4>{data?.description}</h4>
+            <ul class="grid md:grid-cols-2 gap-4">
+              <li>
+                <span class="font-semibold">Fecha de creación:</span>
+                {data?.created_at}
+              </li>
+              <li>
+                <span class="font-semibold">Fecha de actualización:</span>
+                {data?.pushed_at}
+              </li>
+              <li class="md:col-span-2">
+                <span class="font-semibold">Lenguajes utilizados:</span>
+                // Sección por agregar. :D //
+              </li>
+            </ul>
+          </>
+        )
+      }
+    </header>
+    <section
+      class="flex flex-col border border-custom-accent/40 shadow-lg shadow-custom-accent/20 rounded-2xl p-8 mt-10"
+    >
+      <article>
+        <header class="flex justify-between">
+          <span class="flex gap-2 items-center">
+            <Book class="text-custom-accent" /><span>Readme</span>
+          </span>
+          <span class="flex gap-2">
+            {
+              error ? (
+                <>
+                  <h2 class="text-center">
+                    Fallo al obtener los datos del proyecto. :(
+                  </h2>
+                  <p>{error}.</p>
+                </>
+              ) : (
+                <>
+                  <Link
+                    title={`Ir al repositorio del proyecto ${data?.name}`}
+                    href={`https://github.com/yaelooo/${data?.name}`}
+                    sr={`Ir al repositorio del proyecto ${data?.name}`}
+                    isExternal
+                    isCustom
+                    extraClasses="flex gap-2 items-center text-current"
+                  >
+                    <Github class="text-custom-accent" />
+                    <span class="hidden sm:flex">Ver código</span>
+                  </Link>
+                  {data?.homepage ? (
+                    <Link
+                      title={`Ir a la página del proyecto ${data?.name}`}
+                      href={`${data?.homepage}`}
+                      sr={`Ir a la página del proyecto ${data?.name}`}
+                      isExternal
+                      isCustom
+                      extraClasses="flex gap-2 items-center text-current"
+                    >
+                      <Web class="text-custom-accent" />
+                      <span class="hidden sm:flex">Ver página</span>
+                    </Link>
+                  ) : null}
+                </>
+              )
+            }
+          </span>
+        </header>
+        <hr
+          class="border-custom-accent/40 shadow-lg shadow-custom-accent/20 rounded-2xl mt-1"
+        />
+        <section class="flex flex-col mt-8 gap-4" set:html={updatedContent} />
+      </article>
+    </section>
+  </article>
+</Layout>
+
+<style is:inline>
+  h1 {
+    font-size: 2.25rem; /* 36px */
+    line-height: 2.5rem; /* 40px */
+    font-weight: 600;
+  }
+
+  h2 {
+    font-size: 1.875rem; /* 30px */
+    line-height: 2.25rem; /* 36px */
+    font-weight: 600;
+  }
+
+  h3 {
+    font-size: 1.5rem; /* 24px */
+    line-height: 2rem; /* 32px */
+    font-weight: 500;
+  }
+
+  h4 {
+    font-size: 1.25rem; /* 20px */
+    line-height: 1.75rem; /* 28px */
+    font-weight: 500;
+  }
+
+  h5 {
+    font-size: 1.125rem; /* 18px */
+    line-height: 1.75rem; /* 28px */
+  }
+
+  h1 > a,
+  h2 > a {
+    --tw-text-opacity: 1;
+    color: rgba(var(--color-accent), var(--tw-text-opacity));
+    text-decoration-style: wavy;
+    text-decoration-color: rgb(var(--color-accent));
+    text-underline-offset: 2px;
+    text-decoration-line: underline;
+  }
+
+  h1 > a:hover,
+  h2 > a:hover {
+    color: currentColor;
+    text-underline-offset: 2px;
+  }
+
+  a {
+    --tw-text-opacity: 1;
+    color: rgba(var(--color-accent), var(--tw-text-opacity));
+  }
+
+  a:hover {
+    text-decoration-line: underline;
+    text-decoration-style: wavy;
+    text-decoration-color: rgb(var(--color-accent));
+    text-underline-offset: 4px;
+  }
+
+  pre {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    border-width: 1px;
+    border-radius: 1rem /* 16px */;
+    --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1),
+      0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color),
+      0 2px 4px -2px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+      var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    --tw-shadow-color: rgba(var(--color-accent), 0.2);
+    --tw-shadow: var(--tw-shadow-colored);
+  }
+
+  code {
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    overflow: auto;
+    flex-wrap: nowrap;
+    display: flex;
+    align-items: center;
+  }
+
+  .copy_container {
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    max-height: max-content;
+  }
+
+  button {
+    display: flex;
+    border: none;
+  }
+</style>
+
+<script is:inline>
+  const SVG_CHECK =
+    '<svg width="24" height="24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"></path><path d="m5 12 5 5L20 7"></path></svg>';
+
+  async function copyToClipboard(text) {
+    try {
+      await navigator.clipboard.writeText(text);
+      console.log("Texto copiado al portapapeles");
+      return true;
+    } catch (err) {
+      console.error("Error al copiar al portapapeles:", err);
+      return false;
+    }
+  }
+
+  const buttons = document.querySelectorAll(".buttonCopy");
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", async () => {
+      const textElement = button.parentElement.previousElementSibling;
+      const textToCopy = textElement.textContent.trim();
+
+      if (await copyToClipboard(textToCopy)) {
+        const originalSvg = button.innerHTML;
+        button.innerHTML = SVG_CHECK;
+
+        setTimeout(() => {
+          button.innerHTML = originalSvg;
+        }, 1000);
+      }
+    });
+  });
+</script>
