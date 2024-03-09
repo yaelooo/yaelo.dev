@@ -241,21 +241,23 @@ let updatedContent = content
     }
   }
 
-  const buttons = document.querySelectorAll(".buttonCopy");
+  document.addEventListener("astro:page-load", () => {
+    const buttons = document.querySelectorAll(".buttonCopy");
 
-  buttons.forEach((button) => {
-    button.addEventListener("click", async () => {
-      const textElement = button.parentElement.previousElementSibling;
-      const textToCopy = textElement.textContent.trim();
+    buttons.forEach((button) => {
+      button.addEventListener("click", async () => {
+        const textElement = button.parentElement.previousElementSibling;
+        const textToCopy = textElement.textContent.trim();
 
-      if (await copyToClipboard(textToCopy)) {
-        const originalSvg = button.innerHTML;
-        button.innerHTML = SVG_CHECK;
+        if (await copyToClipboard(textToCopy)) {
+          const originalSvg = button.innerHTML;
+          button.innerHTML = SVG_CHECK;
 
-        setTimeout(() => {
-          button.innerHTML = originalSvg;
-        }, 1000);
-      }
+          setTimeout(() => {
+            button.innerHTML = originalSvg;
+          }, 1000);
+        }
+      });
     });
   });
 </script>
