@@ -45,10 +45,13 @@ const { data, error } = await getProfile();
               href="mailto:me@yaelo.dev"
               isExternal
               sr="Envíame un correo"
-              extraClasses="flex items-center justify-center gap-2 w-fit underline-offset-4"
+              isCustom
+              extraClasses="hover:underline decoration-wavy decoration-custom-accent flex flex-col items-center justify-center gap-2 w-fit underline-offset-4"
             >
-              <Mail class="size-5" />
-              <span>{data.email}</span>
+              <span class="flex gap-2 items-center">
+                <Mail class="size-5 stroke-custom-accent" />
+                <span class="text-current">{data.email}</span>
+              </span>
             </Link>
             <span class="flex justify-around my-4">
               <Link
