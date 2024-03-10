@@ -4,13 +4,14 @@ import ImageRandom from "@components/ImageRandom.astro";
 import Github from "@icons/Github.astro";
 import Web from "@icons/Web.astro";
 import Info from "@icons/Info.astro";
+import { convertDate } from "@utils/convertDate";
 
 interface Props {
   name: string;
   description: string;
   html_url: string;
   created_at: Date;
-  updated_at: Date;
+  pushed_at: Date;
   homepage: string;
   language: string;
 }
@@ -20,7 +21,7 @@ const {
   description,
   html_url,
   created_at,
-  updated_at,
+  pushed_at,
   homepage,
   language,
 } = Astro.props;
@@ -49,8 +50,14 @@ const {
   </header>
   <section class="flex flex-col gap-2">
     <p>{description}</p>
-    <p>Updated at {new Date(updated_at).toLocaleDateString()}</p>
-    <p>Created at {new Date(created_at).toLocaleDateString()}</p>
+    <p>
+      <span class="font-semibold">Actualización:</span>
+      {convertDate(new Date(pushed_at))}
+    </p>
+    <p>
+      <span class="font-semibold">Creación:</span>
+      {convertDate(new Date(created_at))}
+    </p>
   </section>
   <footer class="flex justify-between">
     <span class="flex items-center gap-2">
