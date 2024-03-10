@@ -222,8 +222,6 @@ let updatedContent = content
     align-items: center;
   }
 
-  /* margin-bottom: 0.5rem; */
-
   ul.md-ul {
     padding-left: 1.5rem;
     list-style: disc;
@@ -266,6 +264,18 @@ let updatedContent = content
     border: none;
   }
 </style>
+
+<!-- Script for removing padding and list-style from ul with input -->
+<script>
+  document.querySelectorAll("ul.md-ul").forEach(function (ul) {
+    (ul as HTMLElement).querySelectorAll("li").forEach(function (li) {
+      if ((li as HTMLElement).querySelector("input")) {
+        (ul as HTMLElement).style.padding = "0";
+        (ul as HTMLElement).style.listStyle = "none";
+      }
+    });
+  });
+</script>
 
 <script is:inline>
   const SVG_CHECK =
