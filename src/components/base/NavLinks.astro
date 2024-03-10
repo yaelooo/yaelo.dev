@@ -11,22 +11,33 @@ const links = [
   { href: "/proyectos", title: "proyectos" },
   { href: "/herramientas", title: "herramientas" },
 ];
+
+function getLinkClass(href: string) {
+  const linkUrl = href.split("/")[1];
+  if (linkUrl === "" && currentUrl === "") {
+    return activeLinkClass;
+  }
+  return linkUrl === currentUrl ? activeLinkClass : inactiveLinkClass;
+}
 ---
 
 <ul class={Astro.props.class}>
   {
-    links.map((link) => (
-      <li>
-        <Link
-          title={upperFirstLetter(link.title)}
-          href={link.href}
-          sr={`Ir a ${upperFirstLetter(link.title)}`}
-          isCustom
-          extraClasses={`${currentUrl === link.href.split("/")[1] ? activeLinkClass : inactiveLinkClass}`}
-        >
-          {upperFirstLetter(link.title)}
-        </Link>
-      </li>
-    ))
+    links.map(({ href, title }) => {
+      const upperTitle = upperFirstLetter(title);
+      return (
+        <li>
+          <Link
+            title={`Ir a la página de ${title}`}
+            href={href}
+            sr={`Ir a la página de ${title}`}
+            isCustom
+            extraClasses={getLinkClass(href)}
+          >
+            {upperTitle}
+          </Link>
+        </li>
+      );
+    })
   }
 </ul>
