@@ -62,12 +62,16 @@ let updatedContent = content
             <h4>{data?.description}</h4>
             <ul class="grid md:grid-cols-2 gap-4">
               <li>
-                <span class="font-semibold">Fecha de creación:</span>
-                {data?.created_at}
+                <span class="font-semibold">Fecha de actualización:</span>
+                {data?.pushed_at
+                  ? convertDate(new Date(data.pushed_at))
+                  : "Fecha no disponible"}
               </li>
               <li>
-                <span class="font-semibold">Fecha de actualización:</span>
-                {data?.pushed_at}
+                <span class="font-semibold">Fecha de creación:</span>
+                {data?.created_at
+                  ? convertDate(new Date(data.created_at))
+                  : "Fecha no disponible"}
               </li>
               <li class="md:col-span-2">
                 <span class="font-semibold">Lenguajes utilizados:</span>
