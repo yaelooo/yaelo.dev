@@ -267,12 +267,14 @@ let updatedContent = content
 
 <!-- Script for removing padding and list-style from ul with input -->
 <script>
-  document.querySelectorAll("ul.md-ul").forEach(function (ul) {
-    (ul as HTMLElement).querySelectorAll("li").forEach(function (li) {
-      if ((li as HTMLElement).querySelector("input")) {
-        (ul as HTMLElement).style.padding = "0";
-        (ul as HTMLElement).style.listStyle = "none";
-      }
+  document.addEventListener("astro:page-load", () => {
+    document.querySelectorAll("ul.md-ul").forEach(function (ul) {
+      (ul as HTMLElement).querySelectorAll("li").forEach(function (li) {
+        if ((li as HTMLElement).querySelector("input")) {
+          (ul as HTMLElement).style.padding = "0";
+          (ul as HTMLElement).style.listStyle = "none";
+        }
+      });
     });
   });
 </script>
