@@ -7,6 +7,7 @@ import Github from "@icons/Github.astro";
 import Web from "@icons/Web.astro";
 import { getRepository, getLanguages } from "@lib/apiGithub";
 import { convertDate } from "@utils/convertDate";
+import { upperFirstLetter } from "@utils/firstLetter";
 
 const { repo } = Astro.params;
 const { data: repoData, error: repoError } = await getRepository(`${repo}`);
@@ -38,8 +39,8 @@ const languagePercentages: [string, number][] = Object.entries(
 <Layout title="Proyectos" description="Proyectos en GitHub">
   <article>
     <header class="flex flex-col gap-4">
-      <h1 class="text-center">{repo}</h1>
-      <p>
+      <h1 class="text-center">{repo && upperFirstLetter(repo)}</h1>
+      <p class="font-semibold">
         {repoData?.description || "Descripción no disponible."}
       </p>
       <ul class="grid md:grid-cols-2 gap-4">
