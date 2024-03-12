@@ -1,50 +1,49 @@
 ---
-import Sun from "@icons/Sun.astro";
-import Moon from "@icons/Moon.astro";
+import Sun from "@icons/Sun.astro"
+import Moon from "@icons/Moon.astro"
 ---
 
 <button onclick="themeSwitch()">
-  <span id="light">
-    <Moon class="fill-indigo-900" />
-    <span class="sr-only">Cambiar a tema claro</span>
-  </span>
-  <span id="dark">
-    <Sun class="fill-yellow-400" />
-    <span class="sr-only">Cambiar a tema oscuro</span>
-  </span>
+	<span id="light">
+		<Moon class="fill-indigo-900" />
+		<span class="sr-only">Cambiar a tema claro</span>
+	</span>
+	<span id="dark">
+		<Sun class="fill-yellow-400" />
+		<span class="sr-only">Cambiar a tema oscuro</span>
+	</span>
 </button>
 
 <script is:inline>
-  let theme = localStorage.getItem("theme");
+	let theme = localStorage.getItem("theme")
 
-  if (!theme) {
-    theme =
-      window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light";
-  }
+	if (!theme) {
+		theme =
+			window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+				? "dark"
+				: "light"
+	}
 
-  document.documentElement.className = theme;
+	document.documentElement.className = theme
 
-  function themeSwitch() {
-    theme = theme === "light" ? "dark" : "light";
-    localStorage.setItem("theme", theme);
-    document.documentElement.className = theme;
-    updateThemeDisplay();
-  }
+	function themeSwitch() {
+		theme = theme === "light" ? "dark" : "light"
+		localStorage.setItem("theme", theme)
+		document.documentElement.className = theme
+		updateThemeDisplay()
+	}
 
-  function updateThemeDisplay() {
-    const lightButton = document.getElementById("light");
-    const darkButton = document.getElementById("dark");
+	function updateThemeDisplay() {
+		const lightButton = document.getElementById("light")
+		const darkButton = document.getElementById("dark")
 
-    if (lightButton && darkButton) {
-      lightButton.style.display = theme === "light" ? "none" : "flex";
-      darkButton.style.display = theme === "dark" ? "none" : "flex";
-    }
-  }
+		if (lightButton && darkButton) {
+			lightButton.style.display = theme === "light" ? "none" : "flex"
+			darkButton.style.display = theme === "dark" ? "none" : "flex"
+		}
+	}
 
-  document.addEventListener("astro:after-swap", updateThemeDisplay);
+	document.addEventListener("astro:after-swap", updateThemeDisplay)
 
-  updateThemeDisplay();
+	updateThemeDisplay()
 </script>

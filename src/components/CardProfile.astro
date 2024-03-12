@@ -1,84 +1,77 @@
 ---
-import ImageRandom from "@components/ImageRandom.astro";
-import Link from "@components/Link.astro";
-import Github from "@icons/Github.astro";
-import Telegram from "@icons/Telegram.astro";
-import Mail from "@icons/Mail.astro";
-import { getProfile } from "@utils/githubApi";
+import ImageRandom from "@components/ImageRandom.astro"
+import Link from "@components/Link.astro"
+import Github from "@icons/Github.astro"
+import Telegram from "@icons/Telegram.astro"
+import Mail from "@icons/Mail.astro"
+import { getProfile } from "@utils/githubApi"
 
-const { data, error } = await getProfile();
+const { data, error } = await getProfile()
 ---
 
 <article
-  class="flex flex-col border-2 border-custom-accent/40 shadow-lg shadow-custom-accent/20 gap-4 p-4 rounded-2xl w-fit"
+	class="flex w-fit flex-col gap-4 rounded-2xl border-2 border-custom-accent/40 p-4 shadow-lg shadow-custom-accent/20"
 >
-  {
-    error ? (
-      <>
-        <header class="flex flex-col">
-          <h2 class="font-semibold text-xl">Fallo al obtener el perfil. :(</h2>
-          <ImageRandom
-            classes="w-96 h-auto"
-            alt="imagen proyectos"
-            src="/notfound"
-          />
-        </header>
-        <section>
-          <p>{error}.</p>
-        </section>
-      </>
-    ) : (
-      data && (
-        <>
-          <header class="flex flex-col gap-4">
-            <h2 class="font-semibold text-xl">{data.name} :D</h2>
-            <ImageRandom
-              classes="w-24 h-auto rounded-full"
-              alt="imagen proyectos"
-              src={data.avatar_url}
-            />
-          </header>
-          <section class="flex flex-col gap-2">
-            <p>{data.bio}</p>
-            <Link
-              title="Correo"
-              href="mailto:me@yaelo.dev"
-              isExternal
-              sr="Envíame un correo"
-              isCustom
-              extraClasses="hover:underline decoration-wavy decoration-custom-accent flex flex-col items-center justify-center gap-2 w-fit underline-offset-4"
-            >
-              <span class="flex gap-2 items-center">
-                <Mail class="size-5 stroke-custom-accent" />
-                <span class="text-current">{data.email}</span>
-              </span>
-            </Link>
-            <span class="flex justify-around my-4">
-              <Link
-                title="Github"
-                href="https://github.com/yaelooo"
-                isButton
-                isExternal
-                sr="Ve a mi github"
-              >
-                <Github />
-                Github
-              </Link>
-
-              <Link
-                title="Telegram"
-                href="https://t.me/yaelou"
-                isButton
-                isExternal
-                sr="Ve a mi Telegram"
-              >
-                <Telegram />
-                Telegram
-              </Link>
-            </span>
-          </section>
-        </>
-      )
-    )
-  }
+	{
+		error ? (
+			<>
+				<header class="flex flex-col">
+					<h2 class="text-xl font-semibold">Fallo al obtener el perfil. :(</h2>
+					<ImageRandom classes="w-96 h-auto" alt="imagen proyectos" src="/notfound" />
+				</header>
+				<p>{error}.</p>
+			</>
+		) : (
+			data && (
+				<>
+					<header class="flex flex-col gap-4">
+						<h2 class="text-xl font-semibold">{data.name} :D</h2>
+						<ImageRandom
+							classes="w-24 h-auto rounded-full"
+							alt="imagen proyectos"
+							src={data.avatar_url}
+						/>
+					</header>
+					<section class="flex flex-col gap-2">
+						<p>{data.bio}</p>
+						<Link
+							title="Correo"
+							href="mailto:me@yaelo.dev"
+							isExternal
+							sr="Envíame un correo"
+							isCustom
+							extraClasses="hover:underline decoration-wavy decoration-custom-accent flex flex-col items-center justify-center gap-2 w-fit underline-offset-4"
+						>
+							<span class="flex items-center gap-2">
+								<Mail class="size-5 stroke-custom-accent" />
+								<span class="text-current">{data.email}</span>
+							</span>
+						</Link>
+						<span class="my-4 flex justify-around">
+							<Link
+								title="Github"
+								href="https://github.com/yaelooo"
+								isButton
+								isExternal
+								sr="Ve a mi github"
+							>
+								<Github />
+								Github
+							</Link>
+							<Link
+								title="Telegram"
+								href="https://t.me/yaelou"
+								isButton
+								isExternal
+								sr="Ve a mi Telegram"
+							>
+								<Telegram />
+								Telegram
+							</Link>
+						</span>
+					</section>
+				</>
+			)
+		)
+	}
 </article>

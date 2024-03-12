@@ -1,26 +1,26 @@
 ---
-import Layout from "@layouts/Layout.astro";
-import ImageRandom from "@components/ImageRandom.astro";
-import Link from "@components/Link.astro";
+import Layout from "@layouts/Layout.astro"
+import ImageRandom from "@components/ImageRandom.astro"
+import Link from "@components/Link.astro"
 ---
 
 <Layout title="404" description="Página de error">
-  <article class="min-h-[calc(100svh-128px)] flex flex-col items-center gap-8">
-    <header class="flex flex-col items-center gap-6">
-      <h1 class="text-7xl font-bold">Error 404</h1>
-      <h2 class="text-5xl font-semibold">Página no encontrada.</h2>
-    </header>
-    <section class="flex flex-col gap-10">
-      <ImageRandom classes="w-60 h-auto" alt="imagen 404" src="/notfound" />
-      <Link
-        title="Volver al inicio"
-        href="/"
-        sr="Volver al inicio"
-        isCustom
-        extraClasses="text-4xl font-bold underline underline-offset-8 text-current hover:text-custom-accent decoration-wavy decoration-custom-accent"
-      >
-        Volver al inicio.
-      </Link>
-    </section>
-  </article>
+	<article class="flex min-h-[calc(100svh-128px)] flex-col items-center gap-8">
+		<header class="flex flex-col items-center gap-6">
+			<h1 class="text-7xl font-bold">Error 404</h1>
+			<h2 class="text-5xl font-semibold">Página no encontrada.</h2>
+		</header>
+		<section class="flex flex-col gap-10">
+			<ImageRandom classes="w-60 h-auto" alt="imagen 404" src="/notfound" />
+			<Link
+				title="Volver al inicio"
+				href="/"
+				sr="Volver al inicio"
+				isCustom
+				extraClasses="text-4xl font-bold underline underline-offset-8 text-current hover:text-custom-accent decoration-wavy decoration-custom-accent"
+			>
+				Volver al inicio.
+			</Link>
+		</section>
+	</article>
 </Layout>

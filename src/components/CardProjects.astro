@@ -1,93 +1,85 @@
 ---
-import Link from "@components/Link.astro";
-import Github from "@icons/Github.astro";
-import Web from "@icons/Web.astro";
-import Info from "@icons/Info.astro";
-import { convertDate } from "@lib/convertDate";
-import { getProjectImageUrl } from "@utils/githubApi";
-import { upperFirstLetter } from "@lib/firstLetter";
+import Link from "@components/Link.astro"
+import Github from "@icons/Github.astro"
+import Web from "@icons/Web.astro"
+import Info from "@icons/Info.astro"
+import { convertDate } from "@lib/convertDate"
+import { getProjectImageUrl } from "@utils/githubApi"
+import { upperFirstLetter } from "@lib/firstLetter"
 
 interface Props {
-  name: string;
-  description: string;
-  html_url: string;
-  created_at: Date;
-  pushed_at: Date;
-  homepage: string;
-  language: string;
+	name: string
+	description: string
+	html_url: string
+	created_at: Date
+	pushed_at: Date
+	homepage: string
+	language: string
 }
 
-const {
-  name,
-  description,
-  html_url,
-  created_at,
-  pushed_at,
-  homepage,
-  language,
-} = Astro.props;
+const { name, description, html_url, created_at, pushed_at, homepage, language } = Astro.props
 
-const url = await getProjectImageUrl(name);
+const url = await getProjectImageUrl(name)
 ---
 
 <article
-  class="flex flex-col border-2 border-custom-accent/40 shadow-lg shadow-custom-accent/20 gap-4 p-4 rounded-2xl justify-between"
+	class="flex flex-col justify-between gap-4 rounded-2xl border-2 border-custom-accent/40 p-4 shadow-lg shadow-custom-accent/20"
 >
-  <header class="flex justify-center">
-    <h2 class="items-center font-semibold text-xl">
-      <Link
-        title={name}
-        href={`/proyectos/${name}`}
-        sr={`Ir al proyecto ${name}`}
-        isCustom
-        extraClasses="text-custom-accent hover:underline decoration-2 decoration-wavy decoration-custom-accent underline-offset-4 flex flex-col gap-4 items-center"
-      >
-        {upperFirstLetter(name)}
-        <img src={url} alt={`imagen del proyecto ${name}`} loading="lazy" />
-      </Link>
-    </h2>
-  </header>
-  <section class="flex flex-col gap-2">
-    <p>{description}</p>
-    <p>
-      <span class="font-semibold">Actualización:</span>
-      {convertDate(new Date(pushed_at))}
-    </p>
-    <p>
-      <span class="font-semibold">Creación:</span>
-      {convertDate(new Date(created_at))}
-    </p>
-  </section>
-  <footer class="flex justify-between">
-    <span class="flex items-center gap-2">
-      <Link
-        title={`Ir al repositorio del proyecto ${name}`}
-        href={html_url}
-        sr={`Ir al repositorio del proyecto ${name}`}
-        isExternal
-      >
-        <Github />
-      </Link>
-      {
-        homepage ? (
-          <Link
-            title={`Ir a la página del proyecto ${name}`}
-            href={homepage}
-            sr={`Ir a la página del proyecto ${name}`}
-            isExternal
-          >
-            <Web />
-          </Link>
-        ) : null
-      }
-      <span>Lenguaje principal: {language}</span>
-    </span>
-    <Link
-      title={`Más información del proyecto ${name}`}
-      href={`/proyectos/${name}`}
-      sr={`Más información del proyecto ${name}`}
-    >
-      <Info />
-    </Link>
-  </footer>
+	<header class="flex justify-center">
+		<h2 class="items-center text-xl font-semibold">
+			<Link
+				title={name}
+				href={`/proyectos/${name}`}
+				sr={`Ir al proyecto ${name}`}
+				isCustom
+				extraClasses="text-custom-accent hover:underline decoration-2 decoration-wavy decoration-custom-accent underline-offset-4 flex flex-col gap-4 items-center"
+			>
+				{upperFirstLetter(name)}
+				<img src={url} alt={`imagen del proyecto ${name}`} loading="lazy" />
+			</Link>
+		</h2>
+	</header>
+	<section class="flex flex-col gap-2">
+		<p>{description}</p>
+		<p>
+			<span class="font-semibold">Actualización:</span>
+			{convertDate(new Date(pushed_at))}
+		</p>
+		<p>
+			<span class="font-semibold">Creación:</span>
+			{convertDate(new Date(created_at))}
+		</p>
+	</section>
+	<footer class="flex justify-between">
+		<span class="flex items-center gap-2">
+			<Link
+				title={`Ir al repositorio del proyecto ${name}`}
+				href={html_url}
+				sr={`Ir al repositorio del proyecto ${name}`}
+				isExternal
+			>
+				<Github />
+			</Link>
+			{
+				homepage ? (
+					<Link
+						title={`Ir a la página del proyecto ${name}`}
+						href={homepage}
+						sr={`Ir a la página del proyecto ${name}`}
+						isExternal
+					>
+						<Web />
+					</Link>
+				) : null
+			}
+			<span>Lenguaje principal: {language}</span>
+		</span>
+		<Link
+			title={`Más información del proyecto ${name}`}
+			href={`/proyectos/${name}`}
+			sr={`Más información del proyecto ${name}`}
+		>
+			<Info />
+		</Link>
+	</footer>
 </article>

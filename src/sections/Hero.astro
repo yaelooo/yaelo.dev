@@ -1,37 +1,23 @@
 ---
-import ImageRandom from "@components/ImageRandom.astro";
-import CardProfile from "@components/CardProfile.astro";
+import ImageRandom from "@components/ImageRandom.astro"
+import CardProfile from "@components/CardProfile.astro"
 ---
 
-<article
-  class="min-h-[calc(100svh-64px)] flex flex-col xl:flex-row gap-8 items-center justify-center xl:justify-between"
+<section
+	class="flex min-h-[calc(100svh-64px)] flex-col items-center justify-center gap-8 xl:flex-row xl:justify-between"
 >
-  <article class="flex flex-col justify-center">
-    <section>
-      <h1
-        class="font-black text-[5.0rem] sm:text-8xl md:text-9xl flex flex-col"
-      >
-        <!-- 1 -->
-        <span class="flex">
-          <span class="mr-4">¡Hola!</span>
-          <ImageRandom
-            classes="w-24 sm:w-32 h-auto"
-            alt="imagen inicio"
-            src="/home"
-          />
-        </span>
-        <!-- 2 -->
-        <span class="flex">
-          <span class="mr-8">Soy</span>
-          <span
-            class="animate-text text-transparent bg-clip-text bg-custom-gradient"
-          >
-            Yael
-          </span>
-          <span class="animate-point">.</span>
-        </span>
-      </h1>
-    </section>
-  </article>
-  <CardProfile />
-</article>
+	<article class="flex flex-col justify-center">
+		<h1 class="flex flex-col text-[5.0rem] font-black sm:text-8xl md:text-9xl">
+			<span class="flex">
+				<span class="mr-4">¡Hola!</span>
+				<ImageRandom classes="w-24 sm:w-32 h-auto" alt="imagen inicio" src="/home" />
+			</span>
+			<span class="flex">
+				<span class="mr-8">Soy</span>
+				<span class="animate-text bg-custom-gradient bg-clip-text text-transparent">Yael</span>
+				<span class="animate-point">.</span>
+			</span>
+		</h1>
+	</article>
+	<CardProfile />
+</section>
