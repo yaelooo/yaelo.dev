@@ -1,39 +1,32 @@
 ---
-import Layout from "@layouts/Layout.astro";
-import CardProjects from "@components/CardProjects.astro";
-import ImageRandom from "@components/ImageRandom.astro";
-import { getRepositories } from "@utils/githubApi";
+import Layout from "@layouts/Layout.astro"
+import Article from "@components/Article.astro"
+import CardProjects from "@components/CardProjects.astro"
+import ImageRandom from "@components/ImageRandom.astro"
+import Code from "@icons/Code.astro"
+import { getRepositories } from "@utils/githubApi"
 
-const { data, error } = await getRepositories(6);
+const { data, error } = await getRepositories(6)
 ---
 
-<Layout
-  title="Proyectos"
-  description="Proyectos escolares, laborales y personales."
->
-  <article class="min-h-[calc(100svh-112px)]">
-    <header class="flex font-semibold pt-2">
-      <h1 class="text-3xl font-semibold mb-6">Últimos proyectos. :D</h1>
-    </header>
-    {
-      error ? (
-        <section class="grid gap-4">
-          <h3 class="font-semibold text-xl">
-            Fallo al obtener los proyectos. :(
-          </h3>
-          <ImageRandom
-            classes="w-96 h-auto"
-            alt="imagen proyectos"
-            src="/notfound"
-          />
-          <p>{error}.</p>
-        </section>
-      ) : (
-        <section class="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
-          {Array.isArray(data) &&
-            data.map((repo) => <CardProjects {...repo} />)}
-        </section>
-      )
-    }
-  </article>
+<Layout title="Proyectos" description="Proyectos escolares, laborales y personales.">
+	<Article>
+		<header class="mb-2 flex gap-2 font-semibold">
+			<Code class="size-8 stroke-custom-accent stroke-2" />
+			<h1 class="flex gap-2 text-3xl">Proyectos.</h1>
+		</header>
+		{
+			error ? (
+				<section class="flex flex-col gap-4">
+					<h2 class="text-xl font-semibold">Fallo al obtener los proyectos. :(</h2>
+					<ImageRandom classes="w-96 h-auto" alt="imagen proyectos" src="/notfound" />
+					<p>{error}.</p>
+				</section>
+			) : (
+				<section class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+					{Array.isArray(data) && data.map((repo) => <CardProjects {...repo} />)}
+				</section>
+			)
+		}
+	</Article>
 </Layout>
