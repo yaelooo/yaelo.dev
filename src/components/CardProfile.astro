@@ -18,7 +18,7 @@ const { data, error } = await getProfile();
         <header class="flex flex-col">
           <h2 class="font-semibold text-xl">Fallo al obtener el perfil. :(</h2>
           <ImageRandom
-            classes="h-96 w-96"
+            classes="w-96 h-auto"
             alt="imagen proyectos"
             src="/notfound"
           />
@@ -33,7 +33,7 @@ const { data, error } = await getProfile();
           <header class="flex flex-col gap-4">
             <h2 class="font-semibold text-xl">{data.name} :D</h2>
             <ImageRandom
-              classes="h-24 w-24 rounded-full"
+              classes="w-24 h-auto rounded-full"
               alt="imagen proyectos"
               src={data.avatar_url}
             />
