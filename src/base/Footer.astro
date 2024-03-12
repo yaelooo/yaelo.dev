@@ -1,74 +1,57 @@
 ---
-import Link from "@components/Link.astro";
-import Arrow from "@icons/Arrow.astro";
-import Telegram from "@icons/Telegram.astro";
-import Facebook from "@icons/Facebook.astro";
-import Instagram from "@icons/Instagram.astro";
-import Github from "@icons/Github.astro";
+import Link from "@components/Link.astro"
+import Arrow from "@icons/Arrow.astro"
+import Telegram from "@icons/Telegram.astro"
+import Facebook from "@icons/Facebook.astro"
+import Instagram from "@icons/Instagram.astro"
+import Github from "@icons/Github.astro"
 ---
 
 <footer
-  class="max-w-sm sm:max-w-lg md:max-w-screen-sm lg:max-w-screen-md xl:max-w-screen-lg 2xl:max-w-screen-xl h-16 flex flex-col justify-center mx-auto"
+	class="mx-auto flex h-16 max-w-sm flex-col justify-center sm:max-w-lg md:max-w-screen-sm lg:max-w-screen-md xl:max-w-screen-lg 2xl:max-w-screen-xl"
 >
-  <hr class="border-custom-accent mt-3" />
-  <nav class="flex items-center justify-between w-full h-full">
-    <button id="scroll-to-top">
-      <Arrow class="stroke-custom-accent" />
-      <span class="sr-only">Ve al principio de la página</span>
-    </button>
-    <div class="flex gap-3">
-      <Link
-        title="Telegram"
-        href="https://t.me/yaelou"
-        isExternal
-        sr="Ve a mi telegram"
-      >
-        <Telegram />
-      </Link>
+	<hr class="mt-3 border-custom-accent" />
+	<nav class="flex h-full w-full items-center justify-between">
+		<button id="scroll-to-top">
+			<Arrow class="stroke-custom-accent" />
+			<span class="sr-only">Ve al principio de la página</span>
+		</button>
+		<div class="flex gap-3">
+			<Link title="Telegram" href="https://t.me/yaelou" isExternal sr="Ve a mi telegram">
+				<Telegram />
+			</Link>
 
-      <Link
-        title="Facebook"
-        href="https://fb.com/yaelooou"
-        isExternal
-        sr="Ve a mi facebook"
-      >
-        <Facebook />
-      </Link>
+			<Link title="Facebook" href="https://fb.com/yaelooou" isExternal sr="Ve a mi facebook">
+				<Facebook />
+			</Link>
 
-      <Link
-        title="Instagram"
-        href="https://instagram.com/yaelojeje"
-        isExternal
-        sr="Ve a mi instagram"
-      >
-        <Instagram />
-      </Link>
+			<Link
+				title="Instagram"
+				href="https://instagram.com/yaelojeje"
+				isExternal
+				sr="Ve a mi instagram"
+			>
+				<Instagram />
+			</Link>
 
-      <Link
-        title="Github"
-        href="https://github.com/yaelooo/yaelo.dev"
-        isExternal
-        sr="Ve a mi github"
-      >
-        <Github />
-      </Link>
-    </div>
-  </nav>
+			<Link
+				title="Github"
+				href="https://github.com/yaelooo/yaelo.dev"
+				isExternal
+				sr="Ve a mi github"
+			>
+				<Github />
+			</Link>
+		</div>
+	</nav>
 </footer>
 
-<script>
-  document.addEventListener("astro:page-load", () => {
-    const $button = document.getElementById("scroll-to-top");
+<script is:inline>
+	document.addEventListener("astro:page-load", () => {
+		const $button = document.getElementById("scroll-to-top")
 
-    window.addEventListener("scroll", () => {
-      const display = window.scrollY > 20 ? "block" : "none";
-      if ($button) {
-        $button.style.display = display;
-      }
-    });
-
-    $button?.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-  });
+		$button?.addEventListener("click", () => {
+			window.scrollTo({ top: 0, behavior: "smooth" })
+		})
+	})
 </script>
