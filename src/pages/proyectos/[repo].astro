@@ -5,9 +5,9 @@ import Link from "@components/Link.astro";
 import Book from "@icons/Book.astro";
 import Github from "@icons/Github.astro";
 import Web from "@icons/Web.astro";
-import { getRepository, getLanguages } from "@lib/apiGithub";
-import { convertDate } from "@utils/convertDate";
-import { upperFirstLetter } from "@utils/firstLetter";
+import { getRepository, getLanguages } from "@utils/githubApi";
+import { convertDate } from "@lib/convertDate";
+import { upperFirstLetter } from "@lib/firstLetter";
 
 const { repo } = Astro.params;
 const { data: repoData, error: repoError } = await getRepository(`${repo}`);
@@ -36,10 +36,15 @@ const languagePercentages: [string, number][] = Object.entries(
 });
 ---
 
-<Layout title="Proyectos" description="Proyectos en GitHub">
+<Layout
+  title={upperFirstLetter(repoData?.name || "Proyecto no disponible.")}
+  description={repoData?.description || "Descripción no disponible."}
+>
   <article>
     <header class="flex flex-col gap-4">
-      <h1 class="text-center">{repo && upperFirstLetter(repo)}</h1>
+      <h1 class="text-center">
+        {repoData?.name && upperFirstLetter(repoData?.name)}
+      </h1>
       <p class="font-semibold">
         {repoData?.description || "Descripción no disponible."}
       </p>
@@ -115,7 +120,7 @@ const languagePercentages: [string, number][] = Object.entries(
         <hr
           class="border-custom-accent/40 shadow-lg shadow-custom-accent/20 rounded-2xl mt-1"
         />
-        <Readme repo={`${repo}`} />
+        <Readme repo={`${repoData?.name}`} />
       </article>
     </section>
   </article>

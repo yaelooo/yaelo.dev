@@ -4,8 +4,8 @@ import Link from "@components/Link.astro";
 import Github from "@icons/Github.astro";
 import Telegram from "@icons/Telegram.astro";
 import Mail from "@icons/Mail.astro";
+import { getProfile } from "@utils/githubApi";
 
-import { getProfile } from "@lib/apiGithub";
 const { data, error } = await getProfile();
 ---
 

@@ -2,8 +2,8 @@
 import Layout from "@layouts/Layout.astro";
 import CardProjects from "@components/CardProjects.astro";
 import ImageRandom from "@components/ImageRandom.astro";
+import { getRepositories } from "@utils/githubApi";
 
-import { getRepositories } from "@lib/apiGithub";
 const { data, error } = await getRepositories(6);
 ---
 

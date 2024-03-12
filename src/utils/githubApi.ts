@@ -1,4 +1,4 @@
-import { type APIGithubOwner, type APIGithubRepositories } from "src/types/api.ts";
+import { type GithubOwner, type GithubRepository } from "src/types/api.ts";
 
 const username = "yaelooo";
 const url_api = `https://api.github.com`;
@@ -62,15 +62,15 @@ async function fetchDataFromRaw(url: string): Promise<{ data: string | null, err
   return { data, error };
 }
   
-export async function getProfile(): Promise<{ data: APIGithubOwner | null, error: any | null }> {
+export async function getProfile(): Promise<{ data: GithubOwner | null, error: any | null }> {
   return await fetchDataFromAPI(`${url_api}/users/${username}`);
 }
 
-export async function getRepositories(perPage: number): Promise<{ data: APIGithubRepositories | null, error: any | null }> {
+export async function getRepositories(perPage: number): Promise<{ data: GithubRepository | null, error: any | null }> {
   return await fetchDataFromAPI(`${url_api}/users/${username}/repos?per_page=${perPage}&sort=updated`);
 }
 
-export async function getRepository(repo: string): Promise<{ data: APIGithubRepositories | null, error: any | null }> {
+export async function getRepository(repo: string): Promise<{ data: GithubRepository | null, error: any | null }> {
   return await fetchDataFromAPI(`${url_api}/repos/${username}/${repo}`);
 }
 

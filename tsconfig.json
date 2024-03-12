@@ -6,9 +6,6 @@
       "@*": [
         "./src/*"
       ],
-      "@base/*": [
-        "./src/components/base/*"
-      ],
     }
   }
 }

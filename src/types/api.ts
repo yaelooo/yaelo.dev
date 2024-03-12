@@ -1,4 +1,4 @@
-export type APIGithubOwner = {
+export type GithubOwner = {
     login:               string;
     id:                  number;
     node_id:             string;
@@ -33,7 +33,7 @@ export type APIGithubOwner = {
     updated_at:          Date;
 }
 
-export type APIGithubRepositories = {
+export type GithubRepository = {
     id:                          number;
     node_id:                     string;
     name:                        string;

@@ -1,5 +1,5 @@
 ---
-import NavLinks from "@base/NavLinks.astro";
+import NavBarLinks from "@base/NavBarLinks.astro";
 import ThemeSwitcher from "@base/ThemeSwitcher.astro";
 import Link from "@components/Link.astro";
 import Logo from "@icons/Logo.astro";
@@ -15,7 +15,7 @@ import Menu from "@icons/Menu.astro";
       <Logo />
     </Link>
     <div class="flex gap-4">
-      <NavLinks class="hidden md:flex gap-4" />
+      <NavBarLinks class="hidden md:flex gap-4" />
       <ThemeSwitcher />
       <button
         class="dropbtn flex md:hidden"
@@ -28,7 +28,7 @@ import Menu from "@icons/Menu.astro";
     </div>
   </nav>
   <div class="dropdown-content hidden absolute top-16 right-0 backdrop-blur">
-    <NavLinks class="flex flex-col gap-4 p-4" />
+    <NavBarLinks class="flex flex-col gap-4 p-4" />
   </div>
 </header>
 

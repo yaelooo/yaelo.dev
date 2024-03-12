@@ -1,7 +1,7 @@
 ---
 import ImageRandom from "@components/ImageRandom.astro";
 import { marked } from "marked";
-import { getReadme } from "@lib/apiGithub";
+import { getReadme } from "@utils/githubApi";
 
 interface Props {
   repo: string;
@@ -47,32 +47,32 @@ let updatedContent = content
 
 <style is:inline>
   h1 {
-    font-size: 2.25rem; /* 36px */
-    line-height: 2.5rem; /* 40px */
+    font-size: 2.25rem;
+    line-height: 2.5rem;
     font-weight: 600;
   }
 
   h2 {
-    font-size: 1.875rem; /* 30px */
-    line-height: 2.25rem; /* 36px */
+    font-size: 1.875rem;
+    line-height: 2.25rem;
     font-weight: 500;
   }
 
   h3 {
-    font-size: 1.5rem; /* 24px */
-    line-height: 2rem; /* 32px */
+    font-size: 1.5rem;
+    line-height: 2rem;
     font-weight: 500;
   }
 
   h4 {
-    font-size: 1.25rem; /* 20px */
-    line-height: 1.75rem; /* 28px */
+    font-size: 1.25rem;
+    line-height: 1.75rem;
     font-weight: 500;
   }
 
   h5 {
-    font-size: 1.125rem; /* 18px */
-    line-height: 1.75rem; /* 28px */
+    font-size: 1.125rem;
+    line-height: 1.75rem;
   }
 
   h1 > a.md-link,
@@ -108,7 +108,7 @@ let updatedContent = content
     justify-content: space-between;
     gap: 10px;
     border-width: 1px;
-    border-radius: 1rem /* 16px */;
+    border-radius: 1rem;
     --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1),
       0 2px 4px -2px rgb(0 0 0 / 0.1);
     --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color),
@@ -183,7 +183,6 @@ let updatedContent = content
   }
 </style>
 
-<!-- Script for removing padding and list-style from ul with input -->
 <script>
   document.addEventListener("astro:page-load", () => {
     document.querySelectorAll("ul.md-ul").forEach(function (ul) {
@@ -198,7 +197,7 @@ let updatedContent = content
 </script>
 
 <script is:inline>
-  const SVG_CHECK =
+  const svg_check =
     '<svg width="24" height="24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"></path><path d="m5 12 5 5L20 7"></path></svg>';
 
   async function copyToClipboard(text) {
@@ -222,7 +221,7 @@ let updatedContent = content
 
         if (await copyToClipboard(textToCopy)) {
           const originalSvg = button.innerHTML;
-          button.innerHTML = SVG_CHECK;
+          button.innerHTML = svg_check;
 
           setTimeout(() => {
             button.innerHTML = originalSvg;

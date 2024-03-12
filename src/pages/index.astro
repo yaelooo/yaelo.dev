@@ -1,20 +1,15 @@
 ---
 import Layout from "@layouts/Layout.astro";
-import Home from "@sections/index/Home.astro";
-import Projects from "@sections/index/Projects.astro";
-import About from "@sections/index/About.astro";
+import Hero from "@sections/Hero.astro";
+import Projects from "@sections/Projects.astro";
+import About from "@sections/About.astro";
 ---
 
 <Layout
   title="Inicio"
   description="Hola, mi nombre es Yael, me encanta el café, la música y los chocolates. Mi número favorito es el 2, mi color favorito es el morado, y mi comida favorita es el arroz."
 >
-  <!-- Home -->
-  <Home />
-
-  <!-- Projects -->
+  <Hero />
   <Projects />
-
-  <!-- About -->
   <About />
 </Layout>

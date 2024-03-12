@@ -1,6 +1,4 @@
 ---
-const num = Math.floor(Math.random() * 4);
-
 interface Props {
   classes: string;
   alt: string;
@@ -8,6 +6,7 @@ interface Props {
 }
 
 const { classes, alt, src } = Astro.props;
+const num = Math.floor(Math.random() * 4);
 ---
 
 <img src={`${src}/${num}.webp`} alt={alt} loading="lazy" class={classes} />

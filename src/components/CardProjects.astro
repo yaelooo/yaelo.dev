@@ -1,12 +1,11 @@
 ---
 import Link from "@components/Link.astro";
-import ImageRandom from "@components/ImageRandom.astro";
 import Github from "@icons/Github.astro";
 import Web from "@icons/Web.astro";
 import Info from "@icons/Info.astro";
-import { convertDate } from "@utils/convertDate";
-import { getProjectImageUrl } from "@lib/apiGithub";
-import { upperFirstLetter } from "@utils/firstLetter";
+import { convertDate } from "@lib/convertDate";
+import { getProjectImageUrl } from "@utils/githubApi";
+import { upperFirstLetter } from "@lib/firstLetter";
 
 interface Props {
   name: string;
@@ -61,7 +60,6 @@ const url = await getProjectImageUrl(name);
   </section>
   <footer class="flex justify-between">
     <span class="flex items-center gap-2">
-      <!-- Link github -->
       <Link
         title={`Ir al repositorio del proyecto ${name}`}
         href={html_url}
@@ -70,7 +68,6 @@ const url = await getProjectImageUrl(name);
       >
         <Github />
       </Link>
-      <!-- Link web -->
       {
         homepage ? (
           <Link
@@ -83,10 +80,8 @@ const url = await getProjectImageUrl(name);
           </Link>
         ) : null
       }
-      <!-- Most used language-->
       <span>Lenguaje principal: {language}</span>
     </span>
-    <!-- Link info -->
     <Link
       title={`Más información del proyecto ${name}`}
       href={`/proyectos/${name}`}
