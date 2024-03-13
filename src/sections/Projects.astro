@@ -11,46 +11,46 @@ const { data, error } = await getRepositories(3)
 ---
 
 <Section id="proyectos" title="Proyectos.">
-	<Code slot="icon" class="size-8 stroke-custom-accent stroke-2" />
-	{
-		error ? (
-			<Article>
-				<header>
-					<h2 class="text-xl font-semibold">Fallo al obtener los proyectos. :(</h2>
-				</header>
-				<ImageRandom classes="w-96 h-auto" alt="imagen proyectos" src="/notfound" />
-				<p>{error}.</p>
-			</Article>
-		) : (
-			<section class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-				{Array.isArray(data) && data.map((repo) => <CardProjects {...repo} />)}
-				<Article extraClasses="rounded-2xl border-2 border-custom-accent/40 p-4 shadow-lg shadow-custom-accent/20">
-					<header class="flex h-full justify-around">
-						<h2 class="flex flex-col items-center justify-center text-xl font-semibold xl:gap-10">
-							<Link
-								title="Ver más proyectos. :D"
-								href="/proyectos"
-								sr="Ir a la sección de proyectos."
-								isCustom
-								extraClasses="flex flex-col gap-4 text-custom-accent hover:underline decoration-2 decoration-wavy decoration-custom-accent underline-offset-4"
-							>
-								<span>Ver más proyectos... :D</span>
-								<ImageRandom classes="w-60 h-auto" alt="imagen del proyecto" src="/projects" />
-							</Link>
-						</h2>
-					</header>
-				</Article>
-				<Article extraClasses="hidden justify-between rounded-2xl border-2 border-custom-accent/40 p-4 shadow-lg shadow-custom-accent/20 md:flex xl:hidden">
-					<header class="flex h-full justify-center">
-						<h2 class="flex flex-col items-center gap-4 text-xl font-semibold xl:gap-10">
-							<span class="text-custom-accent">
-								Perdón, ya no supe que más poner para rellenar el espacio. :c
-							</span>
-							<ImageRandom classes="w-60 h-auto" alt="imagen del proyecto" src="/about" />
-						</h2>
-					</header>
-				</Article>
-			</section>
-		)
-	}
+  <Code slot="icon" class="size-8 stroke-custom-accent stroke-2" />
+  {
+    error ? (
+      <Article>
+        <header>
+          <h2 class="text-xl font-semibold">Fallo al obtener los proyectos. :(</h2>
+        </header>
+        <ImageRandom classes="w-96 h-auto" alt="imagen proyectos" src="/notfound" />
+        <p>{error}.</p>
+      </Article>
+    ) : (
+      <section class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        {Array.isArray(data) && data.map((repo) => <CardProjects {...repo} />)}
+        <Article extraClasses="rounded-2xl border-2 border-custom-accent/40 p-4 shadow-lg shadow-custom-accent/20">
+          <header class="flex h-full justify-around">
+            <h2 class="flex flex-col items-center justify-center text-xl font-semibold xl:gap-10">
+              <Link
+                title="Ver más proyectos. :D"
+                href="/proyectos"
+                sr="Ir a la sección de proyectos."
+                isCustom
+                extraClasses="flex flex-col gap-4 text-custom-accent hover:underline decoration-2 decoration-wavy decoration-custom-accent underline-offset-4"
+              >
+                <span>Ver más proyectos... :D</span>
+                <ImageRandom classes="w-60 h-auto" alt="imagen del proyecto" src="/projects" />
+              </Link>
+            </h2>
+          </header>
+        </Article>
+        <Article extraClasses="hidden justify-between rounded-2xl border-2 border-custom-accent/40 p-4 shadow-lg shadow-custom-accent/20 md:flex xl:hidden">
+          <header class="flex h-full justify-center">
+            <h2 class="flex flex-col items-center gap-4 text-xl font-semibold xl:gap-10">
+              <span class="text-custom-accent">
+                Perdón, ya no supe que más poner para rellenar el espacio. :c
+              </span>
+              <ImageRandom classes="w-60 h-auto" alt="imagen del proyecto" src="/about" />
+            </h2>
+          </header>
+        </Article>
+      </section>
+    )
+  }
 </Section>

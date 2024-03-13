@@ -1,11 +1,11 @@
 ---
 interface Props {
-	extraClasses?: string
+  extraClasses?: string
 }
 
 const { extraClasses } = Astro.props
 ---
 
 <article class=`flex flex-col gap-4 ${extraClasses}`>
-	<slot />
+  <slot />
 </article>

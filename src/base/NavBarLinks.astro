@@ -4,40 +4,40 @@ import { upperFirstLetter } from "@lib/firstLetter"
 
 const currentUrl = Astro.url.pathname.split("/")[1]
 const activeLinkClass =
-	"text-custom-accent underline decoration-wavy decoration-2 underline-offset-4 font-bold"
+  "text-custom-accent underline decoration-wavy decoration-2 underline-offset-4 font-bold"
 const inactiveLinkClass = "hover:text-custom-accent"
 const links = [
-	{ href: "/", title: "inicio" },
-	{ href: "/proyectos", title: "proyectos" },
-	{ href: "/herramientas", title: "herramientas" },
+  { href: "/", title: "inicio" },
+  { href: "/proyectos", title: "proyectos" },
+  { href: "/herramientas", title: "herramientas" },
 ]
 
 function getLinkClass(href: string) {
-	const linkUrl = href.split("/")[1]
-	if (linkUrl === "" && currentUrl === "") {
-		return activeLinkClass
-	}
-	return linkUrl === currentUrl ? activeLinkClass : inactiveLinkClass
+  const linkUrl = href.split("/")[1]
+  if (linkUrl === "" && currentUrl === "") {
+    return activeLinkClass
+  }
+  return linkUrl === currentUrl ? activeLinkClass : inactiveLinkClass
 }
 ---
 
 <ul class={Astro.props.class}>
-	{
-		links.map(({ href, title }) => {
-			const upperTitle = upperFirstLetter(title)
-			return (
-				<li>
-					<Link
-						title={`Ir a la página de ${title}`}
-						href={href}
-						sr={`Ir a la página de ${title}`}
-						isCustom
-						extraClasses={getLinkClass(href)}
-					>
-						{upperTitle}
-					</Link>
-				</li>
-			)
-		})
-	}
+  {
+    links.map(({ href, title }) => {
+      const upperTitle = upperFirstLetter(title)
+      return (
+        <li>
+          <Link
+            title={`Ir a la página de ${title}`}
+            href={href}
+            sr={`Ir a la página de ${title}`}
+            isCustom
+            extraClasses={getLinkClass(href)}
+          >
+            {upperTitle}
+          </Link>
+        </li>
+      )
+    })
+  }
 </ul>

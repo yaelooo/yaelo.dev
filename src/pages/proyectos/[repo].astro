@@ -15,106 +15,106 @@ const { data: repoData, error: repoError } = await getRepository(`${repo}`)
 const { data: languagesData, error: languagesError } = await getLanguages(`${repo}`)
 
 if (repoError) {
-	return Astro.redirect("/404")
+  return Astro.redirect("/404")
 }
 
 if (!languagesData) {
-	throw new Error("No se pudo obtener los datos de los lenguajes")
+  throw new Error("No se pudo obtener los datos de los lenguajes")
 }
 
 const totalBytesOfCode: number = Object.values(languagesData).reduce(
-	(total: number, bytesOfCode: number) => total + bytesOfCode,
-	0
+  (total: number, bytesOfCode: number) => total + bytesOfCode,
+  0
 )
 
 const languagePercentages: [string, number][] = Object.entries(languagesData).map(
-	([language, bytesOfCode]: [string, number]) => {
-		const percentage: number = (bytesOfCode / totalBytesOfCode) * 100
-		return [language, percentage]
-	}
+  ([language, bytesOfCode]: [string, number]) => {
+    const percentage: number = (bytesOfCode / totalBytesOfCode) * 100
+    return [language, percentage]
+  }
 )
 ---
 
 <Layout
-	title={upperFirstLetter(repoData?.name || "Proyecto no disponible.")}
-	description={repoData?.description || "Descripción no disponible."}
+  title={upperFirstLetter(repoData?.name || "Proyecto no disponible.")}
+  description={repoData?.description || "Descripción no disponible."}
 >
-	<Article>
-		<header class="mb-2 flex flex-col gap-4 font-semibold">
-			<h1>
-				{repoData?.name && upperFirstLetter(repoData?.name)}
-			</h1>
-			<p class="font-semibold">
-				{repoData?.description || "Descripción no disponible."}
-			</p>
-			<ul class="grid gap-4 md:grid-cols-2">
-				<li>
-					<span class="font-semibold">Fecha de actualización:</span>
-					{repoData?.pushed_at ? convertDate(new Date(repoData.pushed_at)) : "Fecha no disponible"}.
-				</li>
-				<li>
-					<span class="font-semibold">Fecha de creación:</span>
-					{
-						repoData?.created_at
-							? convertDate(new Date(repoData.created_at))
-							: "Fecha no disponible"
-					}.
-				</li>
-				<li class="md:col-span-2">
-					<span class="font-semibold">Lenguajes utilizados:</span>
-					{
-						languagesError
-							? "Error al obtener los lenguajes."
-							: languagesData &&
-								languagePercentages.map(([language, percentage]) => (
-									<span class="mr-2 inline-block">
-										{language}: {percentage.toFixed(1)}%
-									</span>
-								))
-					}
-				</li>
-			</ul>
-		</header>
-		<section
-			class="flex flex-col rounded-2xl border border-custom-accent/40 p-8 shadow-lg shadow-custom-accent/20"
-		>
-			<article>
-				<header class="flex justify-between">
-					<span class="flex items-center gap-2">
-						<Book class="text-custom-accent" /><span>Readme</span>
-					</span>
-					<span class="flex gap-2">
-						<Link
-							title={`Ir al repositorio del proyecto ${repoData?.name}`}
-							href={`${repoData?.html_url}`}
-							sr={`Ir al repositorio del proyecto ${repoData?.name}`}
-							isExternal
-							isCustom
-							extraClasses="flex gap-2 items-center text-current"
-						>
-							<Github class="text-custom-accent" />
-							<span class="hidden sm:flex">Ver código</span>
-						</Link>
-						{
-							repoData?.homepage ? (
-								<Link
-									title={`Ir a la página del proyecto ${repoData?.name}`}
-									href={`${repoData?.homepage}`}
-									sr={`Ir a la página del proyecto ${repoData?.name}`}
-									isExternal
-									isCustom
-									extraClasses="flex gap-2 items-center text-current"
-								>
-									<Web class="text-custom-accent" />
-									<span class="hidden sm:flex">Ver página</span>
-								</Link>
-							) : null
-						}
-					</span>
-				</header>
-				<hr class="mt-1 rounded-2xl border-custom-accent/40 shadow-lg shadow-custom-accent/20" />
-				<Readme repo={`${repoData?.name}`} />
-			</article>
-		</section>
-	</Article>
+  <Article>
+    <header class="mb-2 flex flex-col gap-4 font-semibold">
+      <h1>
+        {repoData?.name && upperFirstLetter(repoData?.name)}
+      </h1>
+      <p class="font-semibold">
+        {repoData?.description || "Descripción no disponible."}
+      </p>
+      <ul class="grid gap-4 md:grid-cols-2">
+        <li>
+          <span class="font-semibold">Fecha de actualización:</span>
+          {repoData?.pushed_at ? convertDate(new Date(repoData.pushed_at)) : "Fecha no disponible"}.
+        </li>
+        <li>
+          <span class="font-semibold">Fecha de creación:</span>
+          {
+            repoData?.created_at
+              ? convertDate(new Date(repoData.created_at))
+              : "Fecha no disponible"
+          }.
+        </li>
+        <li class="md:col-span-2">
+          <span class="font-semibold">Lenguajes utilizados:</span>
+          {
+            languagesError
+              ? "Error al obtener los lenguajes."
+              : languagesData &&
+                languagePercentages.map(([language, percentage]) => (
+                  <span class="mr-2 inline-block">
+                    {language}: {percentage.toFixed(1)}%
+                  </span>
+                ))
+          }
+        </li>
+      </ul>
+    </header>
+    <section
+      class="flex flex-col rounded-2xl border border-custom-accent/40 p-8 shadow-lg shadow-custom-accent/20"
+    >
+      <article>
+        <header class="flex justify-between">
+          <span class="flex items-center gap-2">
+            <Book class="text-custom-accent" /><span>Readme</span>
+          </span>
+          <span class="flex gap-2">
+            <Link
+              title={`Ir al repositorio del proyecto ${repoData?.name}`}
+              href={`${repoData?.html_url}`}
+              sr={`Ir al repositorio del proyecto ${repoData?.name}`}
+              isExternal
+              isCustom
+              extraClasses="flex gap-2 items-center text-current"
+            >
+              <Github class="text-custom-accent" />
+              <span class="hidden sm:flex">Ver código</span>
+            </Link>
+            {
+              repoData?.homepage ? (
+                <Link
+                  title={`Ir a la página del proyecto ${repoData?.name}`}
+                  href={`${repoData?.homepage}`}
+                  sr={`Ir a la página del proyecto ${repoData?.name}`}
+                  isExternal
+                  isCustom
+                  extraClasses="flex gap-2 items-center text-current"
+                >
+                  <Web class="text-custom-accent" />
+                  <span class="hidden sm:flex">Ver página</span>
+                </Link>
+              ) : null
+            }
+          </span>
+        </header>
+        <hr class="mt-1 rounded-2xl border-custom-accent/40 shadow-lg shadow-custom-accent/20" />
+        <Readme repo={`${repoData?.name}`} />
+      </article>
+    </section>
+  </Article>
 </Layout>

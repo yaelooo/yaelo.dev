@@ -10,23 +10,23 @@ const { data, error } = await getRepositories(6)
 ---
 
 <Layout title="Proyectos" description="Proyectos escolares, laborales y personales.">
-	<Article>
-		<header class="mb-2 flex gap-2 font-semibold">
-			<Code class="size-8 stroke-custom-accent stroke-2" />
-			<h1 class="flex gap-2 text-3xl">Proyectos.</h1>
-		</header>
-		{
-			error ? (
-				<section class="flex flex-col gap-4">
-					<h2 class="text-xl font-semibold">Fallo al obtener los proyectos. :(</h2>
-					<ImageRandom classes="w-96 h-auto" alt="imagen proyectos" src="/notfound" />
-					<p>{error}.</p>
-				</section>
-			) : (
-				<section class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-					{Array.isArray(data) && data.map((repo) => <CardProjects {...repo} />)}
-				</section>
-			)
-		}
-	</Article>
+  <Article>
+    <header class="mb-2 flex gap-2 font-semibold">
+      <Code class="size-8 stroke-custom-accent stroke-2" />
+      <h1 class="flex gap-2 text-3xl">Proyectos.</h1>
+    </header>
+    {
+      error ? (
+        <section class="flex flex-col gap-4">
+          <h2 class="text-xl font-semibold">Fallo al obtener los proyectos. :(</h2>
+          <ImageRandom classes="w-96 h-auto" alt="imagen proyectos" src="/notfound" />
+          <p>{error}.</p>
+        </section>
+      ) : (
+        <section class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {Array.isArray(data) && data.map((repo) => <CardProjects {...repo} />)}
+        </section>
+      )
+    }
+  </Article>
 </Layout>
