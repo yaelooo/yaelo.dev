@@ -19,7 +19,7 @@ interface Props {
 
 const { name, description, html_url, created_at, pushed_at, homepage, language } = Astro.props
 
-const url = await getProjectImageUrl(name)
+const url = getProjectImageUrl(name)
 ---
 
 <article
