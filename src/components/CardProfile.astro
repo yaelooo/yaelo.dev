@@ -36,7 +36,7 @@ const { data, error } = await getProfile()
             <p>{data.bio}</p>
             <Link
               title="Correo"
-              href="mailto:me@yaelo.dev"
+              href={`mailto:${data.email}`}
               isExternal
               sr="Envíame un correo"
               isCustom
