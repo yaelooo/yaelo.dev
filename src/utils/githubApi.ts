@@ -29,9 +29,9 @@ async function fetchDataFromAPI(url: string): Promise<{ data: any | null; error:
   try {
     const res: Response = await fetch(url, {
       headers: {
-        Authorization: `token ${token}`,
+        "User-Agent": "yaelooo",
+        "Authorization": `token ${token}`,
       },
-      cache: "force-cache",
     })
 
     handleStatusCodes(res)
