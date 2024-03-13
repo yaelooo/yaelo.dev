@@ -14,10 +14,15 @@ import CardProfile from "@components/CardProfile.astro"
       </span>
       <span class="flex">
         <span class="mr-8">Soy</span>
-        <span class="animate-text bg-custom-gradient bg-clip-text text-transparent">Yael</span>
+        <span id="name" class="animate-text bg-custom-gradient bg-clip-text">Yael</span>
         <span class="animate-point">.</span>
       </span>
     </h1>
   </article>
   <CardProfile />
 </section>
+
+<script is:inline>
+  const name = document.getElementById("name")
+  name?.classList.add("text-transparent")
+</script>

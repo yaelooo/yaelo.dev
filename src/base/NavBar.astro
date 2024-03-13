@@ -17,8 +17,12 @@ import Menu from "@icons/Menu.astro"
     <div class="flex gap-4">
       <NavBarLinks class="hidden gap-4 md:flex" />
       <ThemeSwitcher />
-      <button class="dropbtn flex md:hidden" role="button" onclick="toggleDropdown()">
-        <Menu class="stroke-custom-accent" />
+      <button
+        class="dropbtn flex text-custom-accent md:hidden"
+        role="button"
+        onclick="toggleDropdown()"
+      >
+        <Menu />
         <span class="sr-only">Menú</span>
       </button>
     </div>

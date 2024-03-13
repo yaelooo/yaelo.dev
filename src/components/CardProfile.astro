@@ -43,7 +43,9 @@ const { data, error } = await getProfile()
               extraClasses="hover:underline decoration-wavy decoration-custom-accent flex flex-col items-center justify-center gap-2 w-fit underline-offset-4"
             >
               <span class="flex items-center gap-2">
-                <Mail class="size-5 stroke-custom-accent" />
+                <span class="text-custom-accent">
+                  <Mail class="size-5" />
+                </span>
                 <span class="text-current">{data.email}</span>
               </span>
             </Link>
