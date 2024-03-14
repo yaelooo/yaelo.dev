@@ -1,4 +1,4 @@
-export function convertDate(date: Date, locale: string = "en-US"): string {
+export function convertDate(date: Date, locale: string = "es-MX"): string {
   const options: Intl.DateTimeFormatOptions = {
     year: "numeric",
     month: "numeric",
