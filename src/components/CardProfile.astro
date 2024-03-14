@@ -15,9 +15,9 @@ const { data, error } = await getProfile()
   {
     error ? (
       <>
-        <header class="flex flex-col">
+        <header class="flex flex-col gap-4">
           <h2 class="text-xl font-semibold">Fallo al obtener el perfil. :(</h2>
-          <ImageRandom classes="w-96 h-auto" alt="imagen proyectos" src="/notfound" />
+          <ImageRandom classes="w-24 h-auto rounded-full" alt="imagen proyectos" src="/notfound" />
         </header>
         <p>{error}.</p>
       </>
