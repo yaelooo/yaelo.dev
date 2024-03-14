@@ -1,5 +1,5 @@
 ---
-import ImageRandom from "@components/ImageRandom.astro"
+import RandomImage from "@components/RandomImage.astro"
 import Link from "@components/Link.astro"
 import Github from "@icons/Github.astro"
 import Telegram from "@icons/Telegram.astro"
@@ -17,7 +17,7 @@ const { data, error } = await getProfile()
       <>
         <header class="flex flex-col gap-4">
           <h2 class="text-xl font-semibold">Fallo al obtener el perfil. :(</h2>
-          <ImageRandom classes="w-24 h-auto rounded-full" alt="imagen proyectos" src="/notfound" />
+          <RandomImage classes="w-24 h-auto rounded-full" alt="imagen proyectos" src="/notfound" />
         </header>
         <p>{error}.</p>
       </>
@@ -26,7 +26,7 @@ const { data, error } = await getProfile()
         <>
           <header class="flex flex-col gap-4">
             <h2 class="text-xl font-semibold">{data.name} :D</h2>
-            <ImageRandom
+            <RandomImage
               classes="w-24 h-auto rounded-full"
               alt="imagen proyectos"
               src={data.avatar_url}

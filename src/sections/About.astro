@@ -1,7 +1,7 @@
 ---
 import Section from "@components/Section.astro"
 import Article from "@components/Article.astro"
-import ImageRandom from "@components/ImageRandom.astro"
+import RandomImage from "@components/RandomImage.astro"
 import User from "@icons/User.astro"
 import { getAge } from "@lib/getAge"
 ---
@@ -22,7 +22,7 @@ import { getAge } from "@lib/getAge"
       <p>Y pues supongo es todo jeje, no hay muchas cosas interesantes acerca de mi. :D</p>
     </div>
     <div class="flex justify-center md:w-4/12">
-      <ImageRandom classes="w-80 h-auto" alt="imagen acerca de" src="/about" />
+      <RandomImage classes="w-80 h-auto" alt="imagen acerca de" src="/about" />
     </div>
   </Article>
 </Section>

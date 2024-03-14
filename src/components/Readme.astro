@@ -1,5 +1,5 @@
 ---
-import ImageRandom from "@components/ImageRandom.astro"
+import RandomImage from "@components/RandomImage.astro"
 import { marked } from "marked"
 import { getReadme } from "@utils/githubApi"
 
@@ -37,7 +37,7 @@ let updatedContent = content
   error ? (
     <section class="mt-8 flex flex-col gap-4">
       <p>Error al obtener el archivo readme.md :(</p>
-      <ImageRandom classes="w-96" alt="imagen error" src="/notfound" />
+      <RandomImage classes="w-96" alt="imagen error" src="/notfound" />
       <p>{error}</p>
     </section>
   ) : (

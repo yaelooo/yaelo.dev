@@ -2,7 +2,7 @@
 import Layout from "@layouts/Layout.astro"
 import Article from "@components/Article.astro"
 import CardProjects from "@components/CardProjects.astro"
-import ImageRandom from "@components/ImageRandom.astro"
+import RandomImage from "@components/RandomImage.astro"
 import Code from "@icons/Code.astro"
 import { getRepositories } from "@utils/githubApi"
 
@@ -19,7 +19,7 @@ const { data, error } = await getRepositories(6)
       error ? (
         <section class="flex flex-col gap-4">
           <h2 class="text-xl font-semibold">Fallo al obtener los proyectos. :(</h2>
-          <ImageRandom classes="w-96 h-auto" alt="imagen proyectos" src="/notfound" />
+          <RandomImage classes="w-96 h-auto" alt="imagen proyectos" src="/notfound" />
           <p>{error}.</p>
         </section>
       ) : (

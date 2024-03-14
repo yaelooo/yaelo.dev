@@ -3,7 +3,7 @@ import Section from "@components/Section.astro"
 import Article from "@components/Article.astro"
 import CardProjects from "@components/CardProjects.astro"
 import Link from "@components/Link.astro"
-import ImageRandom from "@components/ImageRandom.astro"
+import RandomImage from "@components/RandomImage.astro"
 import Code from "@icons/Code.astro"
 
 import { getRepositories } from "@utils/githubApi"
@@ -18,7 +18,7 @@ const { data, error } = await getRepositories(3)
         <header>
           <h2 class="text-xl font-semibold">Fallo al obtener los proyectos. :(</h2>
         </header>
-        <ImageRandom classes="w-96 h-auto" alt="imagen proyectos" src="/notfound" />
+        <RandomImage classes="w-96 h-auto" alt="imagen proyectos" src="/notfound" />
         <p>{error}.</p>
       </Article>
     ) : (
@@ -35,7 +35,7 @@ const { data, error } = await getRepositories(3)
                 extraClasses="flex flex-col gap-4 text-custom-accent hover:underline decoration-2 decoration-wavy decoration-custom-accent underline-offset-4"
               >
                 <span>Ver más proyectos... :D</span>
-                <ImageRandom classes="w-60 h-auto" alt="imagen del proyecto" src="/projects" />
+                <RandomImage classes="w-60 h-auto" alt="imagen del proyecto" src="/projects" />
               </Link>
             </h2>
           </header>
@@ -46,7 +46,7 @@ const { data, error } = await getRepositories(3)
               <span class="text-custom-accent">
                 Perdón, ya no supe que más poner para rellenar el espacio. :c
               </span>
-              <ImageRandom classes="w-60 h-auto" alt="imagen del proyecto" src="/about" />
+              <RandomImage classes="w-60 h-auto" alt="imagen del proyecto" src="/about" />
             </h2>
           </header>
         </Article>
