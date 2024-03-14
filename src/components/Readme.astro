@@ -31,6 +31,8 @@ let updatedContent = content
   .replace(/<table>/g, '<table class="md-table">')
   .replace(/(<th align=".*?")/g, '$1 class="md-th"')
   .replace(/(<td align=".*?")/g, '$1 class="md-td"')
+  .replace(/<th>/g, '<th class="md-th">')
+  .replace(/<td>/g, '<td class="md-td">')
 ---
 
 {
