@@ -50,28 +50,38 @@ const languagePercentages: [string, number][] = Object.entries(languagesData).ma
       <ul class="grid gap-4 md:grid-cols-2">
         <li>
           <span class="font-semibold">Fecha de actualización:</span>
-          {repoData?.pushed_at ? convertDate(new Date(repoData.pushed_at)) : "Fecha no disponible"}.
+          <span class="font-normal">
+            {
+              repoData?.updated_at
+                ? convertDate(new Date(repoData.updated_at))
+                : "Fecha no disponible"
+            }.
+          </span>
         </li>
         <li>
           <span class="font-semibold">Fecha de creación:</span>
-          {
-            repoData?.created_at
-              ? convertDate(new Date(repoData.created_at))
-              : "Fecha no disponible"
-          }.
+          <span class="font-normal">
+            {
+              repoData?.created_at
+                ? convertDate(new Date(repoData.created_at))
+                : "Fecha no disponible"
+            }.
+          </span>
         </li>
         <li class="md:col-span-2">
           <span class="font-semibold">Lenguajes utilizados:</span>
-          {
-            languagesError
-              ? "Error al obtener los lenguajes."
-              : languagesData &&
-                languagePercentages.map(([language, percentage]) => (
-                  <span class="mr-2 inline-block">
-                    {language}: {percentage.toFixed(1)}%
-                  </span>
-                ))
-          }
+          <span class="font-normal">
+            {
+              languagesError
+                ? "Error al obtener los lenguajes."
+                : languagesData &&
+                  languagePercentages.map(([language, percentage]) => (
+                    <span class="mr-2 inline-block">
+                      {language}: {percentage.toFixed(1)}%
+                    </span>
+                  ))
+            }
+          </span>
         </li>
       </ul>
     </header>
@@ -84,17 +94,6 @@ const languagePercentages: [string, number][] = Object.entries(languagesData).ma
             <Book class="text-custom-accent" /><span>Readme</span>
           </span>
           <span class="flex gap-2">
-            <Link
-              title={`Ir al repositorio del proyecto ${repoData?.name}`}
-              href={`${repoData?.html_url}`}
-              sr={`Ir al repositorio del proyecto ${repoData?.name}`}
-              isExternal
-              isCustom
-              extraClasses="flex gap-2 items-center text-current"
-            >
-              <Github class="text-custom-accent" />
-              <span class="hidden sm:flex">Ver código</span>
-            </Link>
             {
               repoData?.homepage ? (
                 <Link
@@ -103,13 +102,24 @@ const languagePercentages: [string, number][] = Object.entries(languagesData).ma
                   sr={`Ir a la página del proyecto ${repoData?.name}`}
                   isExternal
                   isCustom
-                  extraClasses="flex gap-2 items-center text-current"
+                  extraClasses="flex gap-1 items-center text-current"
                 >
                   <Web class="text-custom-accent" />
                   <span class="hidden sm:flex">Ver página</span>
                 </Link>
               ) : null
             }
+            <Link
+              title={`Ir al repositorio del proyecto ${repoData?.name}`}
+              href={`${repoData?.html_url}`}
+              sr={`Ir al repositorio del proyecto ${repoData?.name}`}
+              isExternal
+              isCustom
+              extraClasses="flex gap-1 items-center text-current"
+            >
+              <Github class="text-custom-accent" />
+              <span class="hidden sm:flex">Ver código</span>
+            </Link>
           </span>
         </header>
         <hr class="mt-1 rounded-2xl border-custom-accent/40 shadow-lg shadow-custom-accent/20" />

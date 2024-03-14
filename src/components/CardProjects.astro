@@ -40,26 +40,26 @@ const url = getProjectImageUrl(name)
     </h2>
   </header>
   <section class="flex flex-col gap-2">
-    <p>{description}</p>
+    <p class="font-semibold">{description}</p>
     <p>
       <span class="font-semibold">Actualización:</span>
-      {convertDate(new Date(pushed_at))}
+      <span class="font-normal">
+        {convertDate(new Date(pushed_at))}
+      </span>
     </p>
     <p>
       <span class="font-semibold">Creación:</span>
-      {convertDate(new Date(created_at))}
+      <span class="font-normal">
+        {convertDate(new Date(created_at))}
+      </span>
     </p>
   </section>
   <footer class="flex justify-between">
+    <span class="flex gap-2">
+      <span class="font-semibold">Lenguaje principal:</span>
+      <span class="font-normal">{language}</span>
+    </span>
     <span class="flex items-center gap-2">
-      <Link
-        title={`Ir al repositorio del proyecto ${name}`}
-        href={html_url}
-        sr={`Ir al repositorio del proyecto ${name}`}
-        isExternal
-      >
-        <Github />
-      </Link>
       {
         homepage ? (
           <Link
@@ -72,14 +72,21 @@ const url = getProjectImageUrl(name)
           </Link>
         ) : null
       }
-      <span>Lenguaje principal: {language}</span>
+      <Link
+        title={`Ir al repositorio del proyecto ${name}`}
+        href={html_url}
+        sr={`Ir al repositorio del proyecto ${name}`}
+        isExternal
+      >
+        <Github />
+      </Link>
+      <Link
+        title={`Más información del proyecto ${name}`}
+        href={`/proyectos/${name}`}
+        sr={`Más información del proyecto ${name}`}
+      >
+        <Info />
+      </Link>
     </span>
-    <Link
-      title={`Más información del proyecto ${name}`}
-      href={`/proyectos/${name}`}
-      sr={`Más información del proyecto ${name}`}
-    >
-      <Info />
-    </Link>
   </footer>
 </article>
