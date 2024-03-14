@@ -23,6 +23,8 @@ import CardProfile from "@components/CardProfile.astro"
 </section>
 
 <script is:inline>
-  const name = document.getElementById("name")
-  name?.classList.add("text-transparent")
+  document.addEventListener("astro:page-load", () => {
+    const name = document.getElementById("name")
+    name?.classList.add("text-transparent")
+  })
 </script>
