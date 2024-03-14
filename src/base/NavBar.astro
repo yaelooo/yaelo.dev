@@ -50,7 +50,6 @@ import Menu from "@icons/Menu.astro"
     dropdown.classList.add(hiddenClass)
   }
 
-  // Close dropdown when clicking outside
   window.addEventListener("click", (event) => {
     if (
       event.target.closest(".dropbtn") === null &&
@@ -60,19 +59,16 @@ import Menu from "@icons/Menu.astro"
     }
   })
 
-  // Close dropdown when pressing escape
   window.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
       hideDropdown()
     }
   })
 
-  // Close dropdown when resizing
   window.addEventListener("resize", () => {
     hideDropdown()
   })
 
-  // Close dropdown when scrolling
   window.addEventListener("scroll", () => {
     hideDropdown()
   })
