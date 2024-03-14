@@ -1,5 +1,7 @@
-# Página web.
+# Web page.
 
-Hola, este es el repositorio de mi página web, realizada con Astro y TailwindCSS. :D
+Hi, this is the repository of my website, made with Astro and Tailwind CSS. :D
 
-![Imagen de mi página web](https://raw.githubusercontent.com/yaelooo/yaelo.dev/main/.ignore/yaelo.dev.webp)
+| Dark Mode                                                          | Light Mode                                                           |
+| ------------------------------------------------------------------ | -------------------------------------------------------------------- |
+| ![home page dark mode](https://i.ibb.co/W23Wy3V/homepagedark.webp) | ![home page light mode](https://i.ibb.co/vHdV5gF/homepagelight.webp) |
