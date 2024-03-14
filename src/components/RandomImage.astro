@@ -3,10 +3,12 @@ interface Props {
   classes: string
   alt: string
   src: string
+  number?: number
+  format?: string
 }
 
-const { classes, alt, src } = Astro.props
-const num = Math.floor(Math.random() * 4)
+const { classes, alt, src, format = "avif", number = 4 } = Astro.props
+const image = Math.floor(Math.random() * number)
 ---
 
-<img src={`${src}/${num}.webp`} alt={alt} loading="lazy" class={classes} />
+<img src={`${src}/${image}.${format}`} alt={alt} loading="lazy" class={classes} />
