@@ -11,9 +11,10 @@ import Menu from "@icons/Menu.astro"
   justify-center sm:max-w-lg md:max-w-screen-sm lg:max-w-screen-md xl:max-w-screen-lg 2xl:max-w-screen-xl"
 >
   <nav class="flex h-full w-full items-center justify-between backdrop-blur">
-    <Link title="Inicio" href="/" sr="Ir a inicio">
+    <button id="logo" title="Inicio" class="text-custom-accent">
       <Logo />
-    </Link>
+      <span class="sr-only">Inicio</span>
+    </button>
     <div class="flex gap-4">
       <NavBarLinks class="hidden gap-4 md:flex" />
       <ThemeSwitcher />
@@ -74,5 +75,19 @@ import Menu from "@icons/Menu.astro"
   // Close dropdown when scrolling
   window.addEventListener("scroll", () => {
     hideDropdown()
+  })
+</script>
+
+<script is:inline>
+  document.addEventListener("astro:page-load", () => {
+    const $button = document.getElementById("logo")
+
+    $button?.addEventListener("click", () => {
+      if (window.scrollY > 0) {
+        window.scrollTo({ top: 0, behavior: "smooth" })
+      } else if (window.location.pathname !== "/") {
+        window.location.href = "/"
+      }
+    })
   })
 </script>
