@@ -44,7 +44,7 @@ const metatags = {
     <meta name="twitter:image" content={metatags.image} />
     <!-- End Meta Tags -->
 
-    <title>Yael / {title}</title>
+    <title>Yael {title ? `/ ${title}` : ""}</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <ViewTransitions />
   </head>
