@@ -11,20 +11,16 @@ import Menu from "@icons/Menu.astro"
   justify-center sm:max-w-lg md:max-w-screen-sm lg:max-w-screen-md xl:max-w-screen-lg 2xl:max-w-screen-xl"
 >
   <nav class="flex h-full w-full items-center justify-between backdrop-blur">
-    <button id="logo" title="Inicio" class="text-custom-accent">
+    <a id="logo" href="/" class="text-custom-accent">
       <Logo />
       <span class="sr-only">Inicio</span>
-    </button>
+    </a>
     <div class="flex gap-4">
       <NavBarLinks class="hidden gap-4 md:flex" />
       <ThemeSwitcher />
-      <button
-        class="dropbtn flex text-custom-accent md:hidden"
-        role="button"
-        onclick="toggleDropdown()"
-      >
+      <button id="dropdown" class="flex text-custom-accent md:hidden">
         <Menu />
-        <span class="sr-only">Menú</span>
+        <span class="sr-only">Menu</span>
       </button>
     </div>
   </nav>
@@ -33,56 +29,62 @@ import Menu from "@icons/Menu.astro"
   </div>
 </header>
 
-<script is:inline>
-  const dropdownClass = "dropdown-content"
-  const hiddenClass = "hidden"
-  const showClass = "flex"
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const buttonDropdown = document.getElementById("dropdown")
+    const dropdownClass = "dropdown-content"
+    const hiddenClass = "hidden"
+    const showClass = "flex"
 
-  function toggleDropdown() {
-    const dropdown = document.querySelector(`.${dropdownClass}`)
-    dropdown.classList.toggle(hiddenClass)
-    dropdown.classList.toggle(showClass)
-  }
-
-  function hideDropdown() {
-    const dropdown = document.querySelector(`.${dropdownClass}`)
-    dropdown.classList.remove(showClass)
-    dropdown.classList.add(hiddenClass)
-  }
-
-  window.addEventListener("click", (event) => {
-    if (
-      event.target.closest(".dropbtn") === null &&
-      event.target.closest(`.${dropdownClass}`) === null
-    ) {
-      hideDropdown()
+    function toggleDropdown() {
+      const dropdown = document.querySelector(`.${dropdownClass}`) as HTMLDivElement
+      dropdown.classList.toggle(hiddenClass)
+      dropdown.classList.toggle(showClass)
     }
-  })
 
-  window.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
-      hideDropdown()
+    function hideDropdown() {
+      const dropdown = document.querySelector(`.${dropdownClass}`) as HTMLDivElement
+      dropdown.classList.remove(showClass)
+      dropdown.classList.add(hiddenClass)
     }
-  })
 
-  window.addEventListener("resize", () => {
-    hideDropdown()
-  })
+    buttonDropdown?.addEventListener("click", () => {
+      toggleDropdown()
+    })
 
-  window.addEventListener("scroll", () => {
-    hideDropdown()
+    window.addEventListener("click", (event) => {
+      const target = event.target as Element
+      if (target.closest("#dropdown") === null && target.closest(`.${dropdownClass}`) === null) {
+        hideDropdown()
+      }
+    })
+
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        hideDropdown()
+      }
+    })
+
+    window.addEventListener("resize", () => {
+      hideDropdown()
+    })
+
+    window.addEventListener("scroll", () => {
+      hideDropdown()
+    })
   })
 </script>
 
-<script is:inline>
+<script>
   document.addEventListener("astro:page-load", () => {
     const $button = document.getElementById("logo")
 
-    $button?.addEventListener("click", () => {
+    $button?.addEventListener("click", (event) => {
       if (window.scrollY > 0) {
+        event.preventDefault()
         window.scrollTo({ top: 0, behavior: "smooth" })
-      } else if (window.location.pathname !== "/") {
-        window.location.href = "/"
+      } else if (window.location.pathname == "/") {
+        event.preventDefault()
       }
     })
   })
